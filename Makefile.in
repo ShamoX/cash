@@ -1,0 +1,260 @@
+#***********************************************************************)
+#*                                Cash                                 *)
+#*                                                                     *)
+#*          Bruno Verlyck, projet Cristal, INRIA Rocquencourt          *)
+#*                                                                     *)
+#*  Copyright 2002 Institut National de Recherche en Informatique et   *)
+#*  en Automatique.  All rights reserved.  This file is distributed    *)
+#*  under the terms of the GNU Lesser General Public License.          *)
+#*                                                                     *)
+#*  Cash is based on Scsh, by Olin Shivers.                            *)
+#***********************************************************************)
+# Makefile derived from the						#
+#             Generic Makefile for Objective Caml Programs		#
+# by									#
+#            Pierre Weis, projet Cristal, INRIA Rocquencourt		#
+#*********************************************************************###
+# Well, I started with it, but now the mods are way beyond `advanced usage'
+
+# The Caml sources (including camlyacc and camllex source files)
+# but NOT single .mli files (w/out corresponding .ml)
+
+SOURCES =									\
+	arg_3_7.ml atom.mll env_3_11.ml time_3_10.ml sexp.ml procobj.ml		\
+	signal_3_9.ml strings_5_1.ml user_group_3_6.ml io_3_2.ml network_4.ml	\
+	proc_state_3_5.ml io_3_3.ml glob.ml proc_3_4.ml tty_3_12.ml		\
+	pf_2_3_to_6.ml expquot.ml charset_14.ml charset_pred.ml delim_7.ml	\
+	rec_field_8.ml cash.ml
+
+# The binaries to generate
+EXECS	= cashtop cashrtop cash
+TSTEXE	= run-pipe with-std charset-test
+LIBS	= libcash.a @DLLIB@
+
+# where to install the binaries
+BINDIR	= @BINDIR@
+LIBDIR  = @LIBDIR@
+
+# other variables set by ./configure
+DLLS	= @DLLS@
+OCAMLC  = @OCAMLC@
+OCAMLOPT = @OCAMLOPT@
+OCAMLDEP = @OCAMLDEP@
+OCAMLDOC = @OCAMLDOC@
+OCAMLLEX = @OCAMLLEX@
+CAMLP4R  = @CAMLP4R@
+OCAMLLIB = @OCAMLLIB@
+OCAMLMKTOP = @OCAMLMKTOP@
+OCAMLMKLIB = @OCAMLMKLIB@
+PCRELIBDIR = @PCRELIBDIR@
+OCAMLSRCDIR = @OCAMLSRCDIR@
+OCAMLVERSION = @OCAMLVERSION@
+
+# camlp4 options
+OCAMLPPOPTIONS = -I .
+# options when compiling and linking
+# $(PCRELIBDIR) for pcre
+OCAMLOPTIONS = -I . -I $(PCRELIBDIR) -I $(OCAMLLIB)/camlp4
+# options when compiling
+# $(OCAMLSRCDIR) for .c: otherlibs/unix/unixsupport.h, e.g.
+# $(OCAMLSRCDIR)/utils for set_dir.ml...
+# $(OCAMLLIB)/caml for socketaddr.h -> misc.h (e.g.)
+# $(OCAMLLIB)/camlp4 for stdpp
+OCAMLNOLINKOPTIONS = -pp "$(CAMLP4R) $(OCAMLPPOPTIONS)" -I $(OCAMLSRCDIR) -I $(OCAMLSRCDIR)/utils -I $(OCAMLLIB)/caml
+# options when linking
+OCAMLLINKOPTIONS = $(DLLS)
+CCOPTS = "-g -O"
+# ocamldoc options
+DOCOPTIONS = -d doc -hide Cash
+
+CAMLCLINK = $(OCAMLC) -g $(OCAMLLINKOPTIONS) $(OCAMLOPTIONS)
+CAMLC = $(OCAMLC) -warn-error A -g $(OCAMLNOLINKOPTIONS) $(OCAMLOPTIONS)
+CAMLCOPT = $(OCAMLOPT) $(OCAMLNOLINKOPTIONS) $(OCAMLOPTIONS)
+CAMLDEP = OCAMLDEP=$(OCAMLDEP) CAMLP4R=$(CAMLP4R) ./fast-depend -I .
+
+# Should be set to -custom if you use any of the libraries above
+# or if any C code have to be linked with your program
+# (irrelevant for ocamlopt)
+CUSTOM =
+
+################ End of user's variables #####################
+all: depend $(EXECS) $(TSTEXE)
+
+install: $(EXECS)
+	install -m 644 cash.ml cash.mli cash.cma cash.cmi $(LIBS) $(LIBDIR)
+	install $? $(BINDIR)
+	rm -f $(BINDIR)/cashr
+	ln $(BINDIR)/cash $(BINDIR)/cashr
+
+# GNU Make doesn't need this, but Sun's do.
+charset_macros.cmo: charset_macros.ml
+	$(CAMLC) -c charset_macros.ml
+
+# Pour les extensions
+# charset_14.cmo: OCAMLPPOPTIONS += -unsafe
+charset_14.cmo: charset_macros.cmo charset_14.ml
+
+run-pipe: $(LIBS) cash.cma run-pipe.cmo
+	$(CAMLCLINK) unix.cma pcre.cma camlp4.cma cash.cma $@.cmo -o $@
+
+with-std: $(LIBS) cash.cma with-std.cmo
+	$(CAMLCLINK) unix.cma pcre.cma camlp4.cma cash.cma $@.cmo -o $@
+
+charset-test: $(LIBS) cash.cma charset_test.cmo
+	$(CAMLCLINK) unix.cma pcre.cma cash.cma charset_test.cmo -o $@
+
+# Little cheat to not link unix.cma
+# add/remove -g if needed
+cash-tramp: cash-tramp.cmo
+	$(OCAMLC) -g -custom -cclib '-lunix' $@.cmo -o $@
+cash-tramp.opt: cash-tramp.cmx
+	$(OCAMLOPT) -cclib '-lunix' cash-tramp.cmx -o $@
+
+cash cashr: cash-tramp cash-tramp.opt
+	cp cash-tramp.opt cash
+	strip cash
+	@rm -f cashr
+	@: 'with ln -s, /proc/self/exe -> cash (the target) on Linux at least'
+	ln cash cashr
+
+cashrtop: set_dir.cmo $(LIBS) cash.cma
+	$(OCAMLMKTOP) -g -o $@ $(OCAMLOPTIONS) $(OCAMLLINKOPTIONS) pcre.cma camlp4r.cma unix.cma cash.cma set_dir.cmo
+
+cashtop: set_dir.cmo $(LIBS) cash.cma
+	$(OCAMLMKTOP) -g -o $@ $(OCAMLOPTIONS) $(OCAMLLINKOPTIONS) pcre.cma camlp4o.cma unix.cma cash.cma set_dir.cmo
+
+doc:	; mkdir doc
+
+latex:  dvi
+
+ps:	dvi
+	cd doc; dvips -o doc.ps doc.dvi || rm doc.ps
+
+dvi:	tex
+	cd doc; texi2dvi doc.tex || rm doc.dvi
+
+tex:	doc doc/ocamldoc.sty doc/doc.tex
+
+doc/doc.tex: cash.mli
+	time $(OCAMLDOC) $(OCAMLNOLINKOPTIONS) $(OCAMLOPTIONS) $(DOCOPTIONS) -latex cash.mli -o doc.tex || rm $@
+
+doc/ocamldoc.sty: ; cd doc; ln -s ../ocaml/ocamldoc/ocamldoc.sty
+
+html:	doc doc/doc.html
+
+doc/doc.html: cash.mli
+	$(OCAMLDOC) $(OCAMLNOLINKOPTIONS) $(OCAMLOPTIONS) $(DOCOPTIONS) -html cash.mli
+
+release/INDEX:  ;
+	{ : ${REL?missing version number};\
+	echo 'Cash, the Caml Shell';\
+	echo '';\
+	echo 'COPYING			Where Cash comes from, redistribution conditions';\
+	echo 'INDEX			This file';\
+	echo 'INSTALL			What is it, what is needed, how to make';\
+	echo 'LGPL			License for Cash';\
+	echo 'cash.tar.gz		Source code (+ doc) of the current release of Cash' "(${REL})";} >release/INDEX
+
+# Xo.mll (-> X.mlo) -> X.ml revised
+# Throw away the rather disturbing `# line'
+atom.ml: atomo.mll
+	ocamllex atomo.mll
+	@rm -f atom.ml
+	camlp4 pa_o.cmo pr_r.cmo -l90 atomo.ml | sed -e '/^# [0-9]/d' >atom.ml
+	if [ -s atom.ml ]; then set -x;mv atomo.ml atom.mlo; else set -x;rm atom.ml; fi
+	@[ -f atom.ml ] && chmod a-w atom.ml
+
+# BV: make C objs
+unix_plus.o: sys.h
+
+COBJS = unix_plus.o cash-prims.o
+
+$(LIBS): $(COBJS)
+	@-rm -f $@
+	$(OCAMLMKLIB) -o cash $(COBJS)
+
+##############################################################
+################ This part should be generic
+################ Nothing to set up or fix here
+##############################################################
+
+SOURCES1 = $(SOURCES:.mly=.ml)
+SOURCES2 = $(SOURCES1:.mll=.ml)
+OBJS = $(SOURCES2:.ml=.cmo)
+OPTOBJS = $(SOURCES2:.ml=.cmx)
+
+###### BV ### On peut pas mettre ça avant le calcul d'OBJS
+cash.cma: $(OBJS)
+	$(OCAMLMKLIB) -o cash -ocamlc '$(CAMLCLINK)' $(OBJS)
+
+cash.cmxa: $(OPTOBJS)
+	$(OCAMLMKLIB) -o cash -ocamlc '$(CAMLCLINK)' $(OPTOBJS)
+
+# If dll aren't supported ? (bytecode executables are of the same size)
+#cashrun: libcash.a cash.cma
+#	$(CAMLCLINK) -make_runtime -o $@ unix.cma pcre.cma odyl.cma camlp4.cma cash.cma -cclib "-lcash"
+
+######
+
+.SUFFIXES:
+.SUFFIXES: .ml .mli .cmo .cmi .cmx .mll .mly .o .c
+
+.c.o:
+	$(CAMLC) -c -ccopt $(CCOPTS) $<
+
+.ml.cmo:
+	$(CAMLC) -c $<
+
+.mli.cmi:
+	$(CAMLC) -c $<
+
+.ml.cmx:
+	$(CAMLCOPT) -c $<
+
+.mll.cmo:
+	$(OCAMLLEX) $<
+	$(CAMLC) -c $*.ml
+
+.mll.cmx:
+	$(OCAMLLEX) $<
+	$(OCAMLOPT) -c $*.ml
+
+.mly.cmo:
+	$(OCAMLYACC) $<
+	$(CAMLC) -c $*.mli
+	$(CAMLC) -c $*.ml
+
+.mly.cmx:
+	$(OCAMLYACC) $<
+	$(OCAMLOPT) -c $*.mli
+	$(OCAMLOPT) -c $*.ml
+
+.mly.cmi:
+	$(OCAMLYACC) $<
+	$(CAMLC) -c $*.mli
+
+.mll.ml:
+	$(OCAMLLEX) $<
+
+.mly.ml:
+	$(OCAMLYACC) $<
+
+clean:
+	rm -f *.cm[ioxa] *~ .*~ #*#
+	rm -f *.[oa] *.so
+	rm -f $(EXECS) $(TSTEXE) cashr cash-tramp cash-tramp.opt
+
+realclean: clean
+	rm -f DEPS/* depend .depend Makefile config.cache
+	touch .depend
+
+.depend: $(SOURCES2) charset_macros.cmo
+	$(CAMLDEP) *.mli *.ml >.newdepend
+	@rm -f .depend
+	mv .newdepend .depend
+
+# BV ne pas refaire .depend ici
+depend: .depend
+	touch depend
+
+include .depend

@@ -1,0 +1,80 @@
+#!/usr/local/adm/src/caml/bin/cashr
+
+open Cash;
+
+value string_of_time t = string_of_date (date_of_time t);
+
+value has_atd_only name =
+  do {
+    ignore (fork_child_with_pipe (fun () -> exec_path "zcat" [name]));
+    ignore
+      (fork_child_with_pipe (fun () -> exec_path "egrep" ["-v"; " atd\\[[0-9]+\\]"]));
+    let pipe_in = in_channel_of_fd 0 in
+    try
+      do {
+        ignore (read_line ~handle_newline:Concat pipe_in);
+        (* drain pipe_in. *)
+        ignore (string_of_in_channel pipe_in);
+        False
+      }
+    with
+    [ End_of_file -> True ]
+  }
+;
+
+value rename_cronlogs nonono silent () =
+  let loginfos =
+    List.map (fun name -> (name, file_last_mod_fn name, file_size_fn name))
+      (glob ["cron.*.gz"; "cronlog.*.gz"])
+  in
+  let loginfos =
+    List.fold_left
+      (fun newinfos ((name, t, size) as info) ->
+         let too_old = time () -. t > float (8 * 31 * 24 * 3600) in
+         let atd_only = size < 1024 && has_atd_only name in
+         if too_old || atd_only then do {
+           if silent then ()
+           else Printf.printf "%s %6d\t%s -> REMOVE\n" (string_of_time t) size name;
+           if nonono then () else delete_file name;
+           newinfos
+         }
+         else [info :: newinfos])
+      [] loginfos
+  in
+  let r =
+    List.fold_left
+      (fun i (name, t, _) ->
+         let newname = "cronlog." ^ string_of_int i ^ ".gz" in
+         do {
+           if newname = name then ()
+           else do {
+             if silent then ()
+             else Printf.printf "%s\t%s -> %s\n" (string_of_time t) name newname;
+             if nonono then () else rename_file name newname
+           };
+           i - 1
+         })
+      (List.length loginfos - 1)
+      (List.sort (fun (_, xt, _) (_, yt, _) -> compare xt yt) loginfos)
+  in
+  assert (-1 = r)
+;
+
+value rename_cronlogs_from_sh () =
+  let nonono = ref False
+  and silent = ref True
+  and dir = ref "/var/log" in
+  let spec =
+    [("-n", Arg.Set nonono, "\tdo nothing");
+     ("-v", Arg.Clear silent, "\tsay what I do (or would do, if -n)");
+     ("-d", Arg.String (fun s -> dir.val := s), "\tchange log directory")]
+  and usage =
+    "Usage: rn-cronlogs [options]\nkeep less than 8 months old cron logs, renaming them cronlog"
+  in
+  do {
+    Arg.parse spec (fun arg -> failwith ("I don't know what to do with: " ^ arg)) usage;
+    with_cwd dir.val (rename_cronlogs nonono.val silent.val)
+  }
+;
+
+if Sys.interactive.val then () else rename_cronlogs_from_sh ();

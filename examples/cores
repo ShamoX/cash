@@ -1,0 +1,81 @@
+#!/usr/local/bin/cashr
+open Cash;
+
+(* ;; Utilisation: cores $(afsfind '*/core' '*/.__afs*' '*/gimpswap.*').
+   ou plutôt: /usr/local/adm/src/cash/examples/cores -f ~/tmp/cores
+ *)
+
+value string_of_accessibility =
+  fun
+  [ Accessible -> "accessible"
+  | Unaccessible -> "search denied"
+  | Permission -> "no permission"
+  | No_directory -> "some directory doesn't exist"
+  | Nonexistent -> "file doesn't exist" ]
+;
+
+value string_of_unix_type =
+  fun
+  [ Unix.S_REG -> "regular"
+  | Unix.S_DIR -> "directory"
+  | Unix.S_CHR -> "character device"
+  | Unix.S_BLK -> "block device"
+  | Unix.S_LNK -> "symbolic link"
+  | Unix.S_FIFO -> "named pipe"
+  | Unix.S_SOCK -> "socket" ]
+;
+
+value report_error ?f_type file status =
+  do {
+    Printf.fprintf stderr "%s: %s" file (string_of_accessibility status);
+    match f_type with
+    [ Some f_type -> prerr_string (string_of_unix_type f_type)
+    | _ -> () ];
+    prerr_newline ()
+  }
+;
+
+(* Permission n'est généralement pas significatif, car basé sur les protections Unix. *)
+(* ELOOP devrait dire Unexisting, mais ça permet de tester sur ~gouget/core. *)
+value interesting_core file =
+  let status =
+    try is_file_not_readable_fn file with
+    [ Unix.Unix_error Unix.ELOOP _ _ -> Unaccessible
+    | Unix.Unix_error Unix.ETIMEDOUT _ _ -> Unaccessible ]
+  in
+  match status with
+  [ No_directory | Nonexistent -> False
+  | Unaccessible -> do { report_error file status; False }
+  | Permission | Accessible ->
+      let f_attr = file_info_fn ~chase:False file in
+      match f_attr.Unix.st_kind with
+      [ Unix.S_DIR | Unix.S_LNK -> False
+      | Unix.S_REG -> f_attr.Unix.st_size > 1024
+      | f_type -> do { report_error ~f_type file status; False } ] ]
+;
+
+value filter_core_files core_files =
+  List.filter interesting_core core_files
+;
+
+value filter_cores_from_file file_of_cores =
+  fold_in_channel (open_in file_of_cores) input_line
+    (fun file interesting_files ->
+       if interesting_core file then [file :: interesting_files] else interesting_files)
+    []
+;
+
+value print_cores = List.iter print_endline;
+
+value cores_from_sh () =
+  let nargs = Array.length Sys.argv in
+  if nargs <= 1 || Sys.argv.(1) = "-help" then
+    Printf.eprintf
+      "Usage: %s <liste de paths de fichiers core à filtrer>\nou:    %s -f <%s>\n"
+      Sys.argv.(0) Sys.argv.(0) "path du fichier contenant cette liste"
+  else if nargs = 3 && Sys.argv.(1) = "-f" then
+    print_cores (List.rev (filter_cores_from_file Sys.argv.(2)))
+  else print_cores (filter_core_files (List.tl (Array.to_list Sys.argv)))
+;
+
+if Sys.interactive.val then () else Unix.handle_unix_error cores_from_sh ();

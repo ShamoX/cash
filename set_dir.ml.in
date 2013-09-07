@@ -1,0 +1,18 @@
+(* @configure_input@ *)
+(***********************************************************************)
+(*                                Cash                                 *)
+(*                                                                     *)
+(*          Bruno Verlyck, projet Cristal, INRIA Rocquencourt          *)
+(*                                                                     *)
+(*  Copyright 2002 Institut National de Recherche en Informatique et   *)
+(*  en Automatique.  All rights reserved.  This file is distributed    *)
+(*  under the terms of the GNU Lesser General Public License.          *)
+(*                                                                     *)
+(*  Cash is based on Scsh, by Olin Shivers.                            *)
+(***********************************************************************)
+
+let contrib_dir = "@OCAMLLIB@/contrib" in
+do {
+  Topdirs.dir_directory contrib_dir;
+  Clflags.include_dirs.val := [contrib_dir :: Clflags.include_dirs.val]
+};

@@ -1,0 +1,35 @@
+# (renommer release en release-#version)
+# RELNUM=0.XY time ./mkdistrib
+set -ex
+	[ "$RELNUM" = `cashr -c 'print_string Cash.version;'` ]
+	make ps html
+	rm -rf release
+	mkdir release
+	make release/INDEX REL=${RELNUM?manque le n° de version} 
+# \ are in case of inclusion in a Makefile
+	(set -e; \
+	 cd release; \
+	 NEWCASH=cash-${RELNUM}; \
+	 cvs -d ":pserver:verlyck@pauillac.inria.fr:/net/pauillac/caml/repository" co cash; \
+	 cp -p ../doc/*.html ../doc/doc* ../doc/style.css cash/doc; mv cash/doc/dist-index.html .; \
+	 mv cash $NEWCASH; \
+	 rm -f `find . -name '.cvsignore' -print`; \
+	 rm -rf `find . -name 'CVS' -print`; \
+	 chmod -R go=u-w .; \
+	 tar zcf $NEWCASH.tar.gz $NEWCASH; \
+	 chmod go=u-w $NEWCASH.tar.gz; \
+	 grep "Cash (${RELNUM})" INDEX; \
+	 cp -p ../COPYING ../LGPL .; \
+	 cp -p ../INSTALL.txt INSTALL; \
+	 chmod go=u-w *; \
+	 mkdir www; \
+	 mkdir www/$NEWCASH; \
+	 mv $NEWCASH/doc www/$NEWCASH; \
+	 rm -fr $NEWCASH; \
+	 mv dist-index.html www/index.html; \
+	 ln -s $NEWCASH www/latest; \
+	 (set -e; cd www; chmod go=u-w . $NEWCASH; tar zcf /tmp/www-cash.tgz .); \
+	 rm -fr www; \
+	 ln -s $NEWCASH.tar.gz cash.tar.gz; \
+	 tar cf /tmp/cash-dist.tar .; \
+	)

@@ -1,0 +1,698 @@
+\relax 
+\@writefile{toc}{\contentsline {section}{\numberline {1}Module {\tt  {Cash}} : The Caml Shell}{2}}
+\newlabel{Cash}{{1}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Copyright \& source-code license}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Caveats}{3}}
+\newlabel{Cash.version}{{1.2}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Naming conventions}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.1}Common naming conventions}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.3.2}Cash own naming conventions}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}A word about Unix standards}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Process notation}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Procedures and syntax extensions}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Interfacing process output to Caml}{5}}
+\newlabel{Cash.runwithinchannel}{{2.2}{5}}
+\newlabel{Cash.runwithoutchannel}{{2.2}{5}}
+\newlabel{Cash.runwithfile}{{2.2}{5}}
+\newlabel{Cash.runwithstring}{{2.2}{5}}
+\newlabel{Cash.runwithstrings}{{2.2}{5}}
+\newlabel{Cash.runwithsexp}{{2.2}{5}}
+\newlabel{Cash.runwithsexps}{{2.2}{6}}
+\newlabel{Cash.stringofinchannel}{{2.2}{6}}
+\newlabel{Cash.sexplistofinchannel}{{2.2}{6}}
+\newlabel{Cash.stringlistofinchannel}{{2.2}{6}}
+\newlabel{Cash.listofinchannel}{{2.2}{6}}
+\newlabel{Cash.foldinchannel}{{2.2}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}More complex process operations}{7}}
+\newlabel{Cash.proc}{{2.3}{7}}
+\newlabel{Cash.runwithinchanplusproc}{{2.3}{7}}
+\newlabel{Cash.runwithoutchanplusproc}{{2.3}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Multiple stream capture}{7}}
+\newlabel{Cash.fd}{{2.4}{7}}
+\newlabel{Cash.runwithcollecting}{{2.4}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Process filters}{8}}
+\newlabel{Cash.charfilter}{{2.5}{8}}
+\newlabel{Cash.stringfilter}{{2.5}{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}System calls}{8}}
+\newlabel{syscalls}{{3}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Errors}{9}}
+\newlabel{Cash.errnoerror}{{3.1}{9}}
+\newlabel{Cash.unwindprotect}{{3.1}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}I/O}{9}}
+\newlabel{gen_io}{{3.2}{9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Pervasives I/O operations}{9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Channel manipulation and standard channels}{9}}
+\newlabel{withstd}{{3.2.2}{9}}
+\newlabel{Cash.closefdafter}{{3.2.2}{9}}
+\newlabel{Cash.closeinafter}{{3.2.2}{9}}
+\newlabel{Cash.closeoutafter}{{3.2.2}{9}}
+\newlabel{Cash.withstdin}{{3.2.2}{9}}
+\newlabel{Cash.withstdout}{{3.2.2}{9}}
+\newlabel{Cash.withstderr}{{3.2.2}{9}}
+\newlabel{Cash.setstdin}{{3.2.2}{10}}
+\newlabel{Cash.setstdout}{{3.2.2}{10}}
+\newlabel{Cash.setstderr}{{3.2.2}{10}}
+\newlabel{Cash.closein}{{3.2.2}{10}}
+\newlabel{Cash.closeout}{{3.2.2}{10}}
+\newlabel{Cash.closefd}{{3.2.2}{10}}
+\newlabel{Cash.stdchanstostdio}{{3.2.2}{10}}
+\newlabel{Cash.stdiotostdchans}{{3.2.2}{10}}
+\newlabel{Cash.withstdiochans}{{3.2.2}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}String channels}{11}}
+\newlabel{Cash.makestringinchannel}{{3.2.3}{11}}
+\newlabel{Cash.makestringoutchannel}{{3.2.3}{11}}
+\newlabel{Cash.stringoutchanneloutput}{{3.2.3}{11}}
+\newlabel{Cash.callwithstringoutchannel}{{3.2.3}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.4}Revealed channels and file descriptors}{11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.5}Channel-mapping machinery}{14}}
+\newlabel{Cash.inchanneloffd}{{3.2.5}{14}}
+\newlabel{Cash.outchanneloffd}{{3.2.5}{14}}
+\newlabel{Cash.fdofinchannel}{{3.2.5}{14}}
+\newlabel{Cash.fdofoutchannel}{{3.2.5}{14}}
+\newlabel{Cash.inchannelrevealed}{{3.2.5}{14}}
+\newlabel{Cash.outchannelrevealed}{{3.2.5}{14}}
+\newlabel{Cash.releaseinchannelhandle}{{3.2.5}{14}}
+\newlabel{Cash.releaseoutchannelhandle}{{3.2.5}{14}}
+\newlabel{Cash.callwithfdesin}{{3.2.5}{14}}
+\newlabel{Cash.callwithfdesout}{{3.2.5}{14}}
+\newlabel{Cash.movefdtofdes}{{3.2.5}{15}}
+\newlabel{Cash.moveinchanneltofdes}{{3.2.5}{15}}
+\newlabel{Cash.moveoutchanneltofdes}{{3.2.5}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.6}Unix I/O}{15}}
+\newlabel{unixio}{{3.2.6}{15}}
+\newlabel{Cash.dupfd}{{3.2.6}{15}}
+\newlabel{Cash.fdesofdupin}{{3.2.6}{15}}
+\newlabel{Cash.fdesofdupout}{{3.2.6}{15}}
+\newlabel{Cash.inchannelofdupfd}{{3.2.6}{15}}
+\newlabel{Cash.dupin}{{3.2.6}{15}}
+\newlabel{Cash.inchannelofdupout}{{3.2.6}{15}}
+\newlabel{Cash.outchannelofdupfd}{{3.2.6}{15}}
+\newlabel{Cash.outchannelofdupin}{{3.2.6}{15}}
+\newlabel{Cash.dupout}{{3.2.6}{15}}
+\newlabel{Cash.seekcommand}{{3.2.6}{16}}
+\newlabel{Cash.seekfd}{{3.2.6}{16}}
+\newlabel{Cash.seekin}{{3.2.6}{16}}
+\newlabel{Cash.seekout}{{3.2.6}{16}}
+\newlabel{Cash.tellfd}{{3.2.6}{16}}
+\newlabel{Cash.tellin}{{3.2.6}{16}}
+\newlabel{Cash.tellout}{{3.2.6}{16}}
+\newlabel{Cash.fileperm}{{3.2.6}{16}}
+\newlabel{Cash.openflag}{{3.2.6}{16}}
+\newlabel{Cash.openfileout}{{3.2.6}{17}}
+\newlabel{Cash.openfilein}{{3.2.6}{17}}
+\newlabel{Cash.openfdes}{{3.2.6}{17}}
+\newlabel{Cash.openinputfile}{{3.2.6}{17}}
+\newlabel{Cash.openoutputfile}{{3.2.6}{17}}
+\newlabel{Cash.openfile}{{3.2.6}{18}}
+\newlabel{Cash.withinputfromfile}{{3.2.6}{18}}
+\newlabel{Cash.withoutputtofile}{{3.2.6}{18}}
+\newlabel{Cash.witherrorstofile}{{3.2.6}{18}}
+\newlabel{Cash.callwithinputfile}{{3.2.6}{18}}
+\newlabel{Cash.callwithoutputfile}{{3.2.6}{18}}
+\newlabel{Cash.callwithfdesfn}{{3.2.6}{18}}
+\newlabel{Cash.fdesflags}{{3.2.6}{18}}
+\newlabel{Cash.fdesflagsfd}{{3.2.6}{18}}
+\newlabel{Cash.fdesflagsin}{{3.2.6}{18}}
+\newlabel{Cash.fdesflagsout}{{3.2.6}{18}}
+\newlabel{Cash.setfdesflagsfd}{{3.2.6}{18}}
+\newlabel{Cash.setfdesflagsin}{{3.2.6}{18}}
+\newlabel{Cash.setfdesflagsout}{{3.2.6}{18}}
+\newlabel{Cash.fdesstatusfd}{{3.2.6}{19}}
+\newlabel{Cash.fdesstatusin}{{3.2.6}{19}}
+\newlabel{Cash.fdesstatusout}{{3.2.6}{19}}
+\newlabel{Cash.setfdesstatusfd}{{3.2.6}{19}}
+\newlabel{Cash.setfdesstatusin}{{3.2.6}{19}}
+\newlabel{Cash.setfdesstatusout}{{3.2.6}{19}}
+\newlabel{Cash.pipe}{{3.2.6}{19}}
+\newlabel{Cash.foldinput}{{3.2.6}{19}}
+\newlabel{Cash.errorpacket}{{3.2.6}{20}}
+\newlabel{Cash.Stringioerror}{{3.2.6}{20}}
+\newlabel{Cash.readstring}{{3.2.6}{20}}
+\newlabel{Cash.readstringin}{{3.2.6}{20}}
+\newlabel{Cash.readstringbang}{{3.2.6}{20}}
+\newlabel{Cash.readstringbangin}{{3.2.6}{20}}
+\newlabel{Cash.readstringpartial}{{3.2.6}{20}}
+\newlabel{Cash.readstringpartialin}{{3.2.6}{20}}
+\newlabel{Cash.readstringbangpartial}{{3.2.6}{20}}
+\newlabel{Cash.readstringbangpartialin}{{3.2.6}{21}}
+\newlabel{Cash.writestring}{{3.2.6}{21}}
+\newlabel{Cash.writestringout}{{3.2.6}{21}}
+\newlabel{Cash.writestringpartial}{{3.2.6}{21}}
+\newlabel{Cash.writestringpartialout}{{3.2.6}{21}}
+\newlabel{Cash.selectable}{{3.2.6}{22}}
+\newlabel{Cash.selectbang}{{3.2.6}{22}}
+\newlabel{Cash.select}{{3.2.6}{22}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.7}Buffered I/O}{23}}
+\newlabel{Cash.bufpolicy}{{3.2.7}{23}}
+\newlabel{Cash.setchanbufferingin}{{3.2.7}{23}}
+\newlabel{Cash.setchanbufferingout}{{3.2.7}{23}}
+\newlabel{Cash.forceoutput}{{3.2.7}{24}}
+\newlabel{Cash.flushallchans}{{3.2.7}{24}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}File system}{24}}
+\newlabel{Cash.override}{{3.3}{24}}
+\newlabel{Cash.createdirectory}{{3.3}{24}}
+\newlabel{Cash.createfifo}{{3.3}{24}}
+\newlabel{Cash.createhardlink}{{3.3}{24}}
+\newlabel{Cash.createsymlink}{{3.3}{24}}
+\newlabel{Cash.deletefile}{{3.3}{24}}
+\newlabel{Cash.deletedirectory}{{3.3}{24}}
+\newlabel{Cash.deletefilesysobject}{{3.3}{24}}
+\newlabel{Cash.readsymlink}{{3.3}{25}}
+\newlabel{Cash.renamefile}{{3.3}{25}}
+\newlabel{Cash.setfilemodefn}{{3.3}{25}}
+\newlabel{Cash.setfilemodefd}{{3.3}{25}}
+\newlabel{Cash.setfilemodein}{{3.3}{25}}
+\newlabel{Cash.setfilemodeout}{{3.3}{25}}
+\newlabel{Cash.setfileownerfn}{{3.3}{25}}
+\newlabel{Cash.setfileownerfd}{{3.3}{25}}
+\newlabel{Cash.setfileownerin}{{3.3}{25}}
+\newlabel{Cash.setfileownerout}{{3.3}{25}}
+\newlabel{Cash.setfilegroupfn}{{3.3}{25}}
+\newlabel{Cash.setfilegroupfd}{{3.3}{25}}
+\newlabel{Cash.setfilegroupin}{{3.3}{25}}
+\newlabel{Cash.setfilegroupout}{{3.3}{25}}
+\newlabel{Cash.setfiletimes}{{3.3}{25}}
+\newlabel{Cash.syncfilefd}{{3.3}{25}}
+\newlabel{Cash.syncfileout}{{3.3}{25}}
+\newlabel{Cash.syncfilesystem}{{3.3}{25}}
+\newlabel{Cash.truncatefilefn}{{3.3}{26}}
+\newlabel{Cash.truncatefilefd}{{3.3}{26}}
+\newlabel{Cash.truncatefilein}{{3.3}{26}}
+\newlabel{Cash.truncatefileout}{{3.3}{26}}
+\newlabel{Cash.filekind}{{3.3}{26}}
+\newlabel{Cash.fileinfo}{{3.3}{26}}
+\newlabel{Cash.fileinfofn}{{3.3}{26}}
+\newlabel{Cash.fileinfofd}{{3.3}{26}}
+\newlabel{Cash.fileinfoin}{{3.3}{26}}
+\newlabel{Cash.fileinfoout}{{3.3}{26}}
+\newlabel{Cash.filetypefn}{{3.3}{27}}
+\newlabel{Cash.filetypefd}{{3.3}{27}}
+\newlabel{Cash.filetypein}{{3.3}{27}}
+\newlabel{Cash.filetypeout}{{3.3}{27}}
+\newlabel{Cash.fileinodefn}{{3.3}{27}}
+\newlabel{Cash.fileinodefd}{{3.3}{27}}
+\newlabel{Cash.fileinodein}{{3.3}{27}}
+\newlabel{Cash.fileinodeout}{{3.3}{27}}
+\newlabel{Cash.filemodefn}{{3.3}{27}}
+\newlabel{Cash.filemodefd}{{3.3}{27}}
+\newlabel{Cash.filemodein}{{3.3}{27}}
+\newlabel{Cash.filemodeout}{{3.3}{27}}
+\newlabel{Cash.filenlinksfn}{{3.3}{27}}
+\newlabel{Cash.filenlinksfd}{{3.3}{27}}
+\newlabel{Cash.filenlinksin}{{3.3}{27}}
+\newlabel{Cash.filenlinksout}{{3.3}{27}}
+\newlabel{Cash.fileownerfn}{{3.3}{27}}
+\newlabel{Cash.fileownerfd}{{3.3}{27}}
+\newlabel{Cash.fileownerin}{{3.3}{27}}
+\newlabel{Cash.fileownerout}{{3.3}{27}}
+\newlabel{Cash.filegroupfn}{{3.3}{27}}
+\newlabel{Cash.filegroupfd}{{3.3}{27}}
+\newlabel{Cash.filegroupin}{{3.3}{27}}
+\newlabel{Cash.filegroupout}{{3.3}{27}}
+\newlabel{Cash.filesizefn}{{3.3}{27}}
+\newlabel{Cash.filesizefd}{{3.3}{27}}
+\newlabel{Cash.filesizein}{{3.3}{28}}
+\newlabel{Cash.filesizeout}{{3.3}{28}}
+\newlabel{Cash.filelastaccessfn}{{3.3}{28}}
+\newlabel{Cash.filelastaccessfd}{{3.3}{28}}
+\newlabel{Cash.filelastaccessin}{{3.3}{28}}
+\newlabel{Cash.filelastaccessout}{{3.3}{28}}
+\newlabel{Cash.filelastmodfn}{{3.3}{28}}
+\newlabel{Cash.filelastmodfd}{{3.3}{28}}
+\newlabel{Cash.filelastmodin}{{3.3}{28}}
+\newlabel{Cash.filelastmodout}{{3.3}{28}}
+\newlabel{Cash.filelaststatuschangefn}{{3.3}{28}}
+\newlabel{Cash.filelaststatuschangefd}{{3.3}{28}}
+\newlabel{Cash.filelaststatuschangein}{{3.3}{28}}
+\newlabel{Cash.filelaststatuschangeout}{{3.3}{28}}
+\newlabel{Cash.isfiledirectoryfn}{{3.3}{28}}
+\newlabel{Cash.isfiledirectoryfd}{{3.3}{28}}
+\newlabel{Cash.isfiledirectoryin}{{3.3}{28}}
+\newlabel{Cash.isfiledirectoryout}{{3.3}{28}}
+\newlabel{Cash.isfilefifofn}{{3.3}{28}}
+\newlabel{Cash.isfilefifofd}{{3.3}{28}}
+\newlabel{Cash.isfilefifoin}{{3.3}{28}}
+\newlabel{Cash.isfilefifoout}{{3.3}{28}}
+\newlabel{Cash.isfileregularfn}{{3.3}{28}}
+\newlabel{Cash.isfileregularfd}{{3.3}{28}}
+\newlabel{Cash.isfileregularin}{{3.3}{28}}
+\newlabel{Cash.isfileregularout}{{3.3}{29}}
+\newlabel{Cash.isfilesocketfn}{{3.3}{29}}
+\newlabel{Cash.isfilesocketfd}{{3.3}{29}}
+\newlabel{Cash.isfilesocketin}{{3.3}{29}}
+\newlabel{Cash.isfilesocketout}{{3.3}{29}}
+\newlabel{Cash.isfilespecialfn}{{3.3}{29}}
+\newlabel{Cash.isfilespecialfd}{{3.3}{29}}
+\newlabel{Cash.isfilespecialin}{{3.3}{29}}
+\newlabel{Cash.isfilespecialout}{{3.3}{29}}
+\newlabel{Cash.isfilesymlinkfn}{{3.3}{29}}
+\newlabel{Cash.isfilesymlinkfd}{{3.3}{29}}
+\newlabel{Cash.isfilesymlinkin}{{3.3}{29}}
+\newlabel{Cash.isfilesymlinkout}{{3.3}{29}}
+\newlabel{Cash.accessibility}{{3.3}{29}}
+\newlabel{Cash.isfilenotreadablefn}{{3.3}{30}}
+\newlabel{Cash.isfilenotreadablefd}{{3.3}{30}}
+\newlabel{Cash.isfilenotreadablein}{{3.3}{30}}
+\newlabel{Cash.isfilenotreadableout}{{3.3}{30}}
+\newlabel{Cash.isfilenotwritablefn}{{3.3}{30}}
+\newlabel{Cash.isfilenotwritablefd}{{3.3}{30}}
+\newlabel{Cash.isfilenotwritablein}{{3.3}{30}}
+\newlabel{Cash.isfilenotwritableout}{{3.3}{30}}
+\newlabel{Cash.isfilenotexecutablefn}{{3.3}{30}}
+\newlabel{Cash.isfilenotexecutablefd}{{3.3}{30}}
+\newlabel{Cash.isfilenotexecutablein}{{3.3}{30}}
+\newlabel{Cash.isfilenotexecutableout}{{3.3}{30}}
+\newlabel{Cash.isfilereadablefn}{{3.3}{30}}
+\newlabel{Cash.isfilereadablefd}{{3.3}{30}}
+\newlabel{Cash.isfilereadablein}{{3.3}{30}}
+\newlabel{Cash.isfilereadableout}{{3.3}{30}}
+\newlabel{Cash.isfilewritablefn}{{3.3}{30}}
+\newlabel{Cash.isfilewritablefd}{{3.3}{30}}
+\newlabel{Cash.isfilewritablein}{{3.3}{30}}
+\newlabel{Cash.isfilewritableout}{{3.3}{30}}
+\newlabel{Cash.isfileexecutablefn}{{3.3}{30}}
+\newlabel{Cash.isfileexecutablefd}{{3.3}{30}}
+\newlabel{Cash.isfileexecutablein}{{3.3}{30}}
+\newlabel{Cash.isfileexecutableout}{{3.3}{30}}
+\newlabel{Cash.existing}{{3.3}{30}}
+\newlabel{Cash.filenotexistsfn}{{3.3}{31}}
+\newlabel{Cash.filenotexistsfd}{{3.3}{31}}
+\newlabel{Cash.filenotexistsin}{{3.3}{31}}
+\newlabel{Cash.filenotexistsout}{{3.3}{31}}
+\newlabel{Cash.isfileexistingfn}{{3.3}{31}}
+\newlabel{Cash.isfileexistingfd}{{3.3}{31}}
+\newlabel{Cash.isfileexistingin}{{3.3}{31}}
+\newlabel{Cash.isfileexistingout}{{3.3}{31}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Directories, globbing and temp files}{31}}
+\newlabel{Cash.folddirectory}{{3.4}{31}}
+\newlabel{Cash.directoryfiles}{{3.4}{31}}
+\newlabel{Cash.glob}{{3.4}{31}}
+\newlabel{Cash.globquote}{{3.4}{32}}
+\newlabel{Cash.filematchpattern}{{3.4}{32}}
+\newlabel{Cash.filematch}{{3.4}{32}}
+\newlabel{Cash.createtempfile}{{3.4}{34}}
+\newlabel{Cash.settempfiletemplate}{{3.4}{34}}
+\newlabel{Cash.withtempfiletemplate}{{3.4}{34}}
+\newlabel{Cash.tempfileiterate}{{3.4}{34}}
+\newlabel{Cash.tempfilechannel}{{3.4}{35}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Processes}{36}}
+\newlabel{Cash.exec}{{3.5}{36}}
+\newlabel{Cash.execpath}{{3.5}{36}}
+\newlabel{Cash.execwithenv}{{3.5}{36}}
+\newlabel{Cash.execpathwithenv}{{3.5}{36}}
+\newlabel{Cash.lowexec}{{3.5}{36}}
+\newlabel{Cash.execpathsearch}{{3.5}{36}}
+\newlabel{Cash.exit}{{3.5}{37}}
+\newlabel{Cash.lowexit}{{3.5}{37}}
+\newlabel{Cash.callterminally}{{3.5}{37}}
+\newlabel{Cash.suspend}{{3.5}{37}}
+\newlabel{Cash.fork}{{3.5}{37}}
+\newlabel{Cash.forkchild}{{3.5}{37}}
+\newlabel{Cash.lowfork}{{3.5}{37}}
+\newlabel{Cash.forkwithpipe}{{3.5}{37}}
+\newlabel{Cash.forkchildwithpipe}{{3.5}{37}}
+\newlabel{Cash.lowforkwithpipe}{{3.5}{37}}
+\newlabel{Cash.forkwithpipeplus}{{3.5}{38}}
+\newlabel{Cash.forkchildwithpipeplus}{{3.5}{38}}
+\newlabel{Cash.lowforkwithpipeplus}{{3.5}{38}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Process objects and process reaping}{39}}
+\newlabel{procobj}{{3.5.1}{39}}
+\newlabel{Cash.pidofproc}{{3.5.1}{39}}
+\newlabel{Cash.probepid}{{3.5.1}{39}}
+\newlabel{Cash.procofpid}{{3.5.1}{39}}
+\newlabel{Cash.autoreappolicy}{{3.5.1}{40}}
+\newlabel{Cash.autoreappolicy}{{3.5.1}{40}}
+\newlabel{Cash.reapzombies}{{3.5.1}{40}}
+\@writefile{toc}{\contentsline {paragraph}{Issues with process reaping}{40}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Process waiting}{41}}
+\newlabel{Cash.processstatus}{{3.5.2}{41}}
+\newlabel{Cash.Childnotready}{{3.5.2}{41}}
+\newlabel{Cash.waitflag}{{3.5.2}{41}}
+\newlabel{Cash.wait}{{3.5.2}{41}}
+\newlabel{Cash.waitpid}{{3.5.2}{41}}
+\newlabel{Cash.waitany}{{3.5.2}{41}}
+\newlabel{Cash.waitany}{{3.5.2}{41}}
+\newlabel{Cash.waitprocessgroup}{{3.5.2}{42}}
+\newlabel{Cash.waitprocessgrouppgrp}{{3.5.2}{42}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Analysing process status codes}{42}}
+\newlabel{waitcodes}{{3.5.3}{42}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Process state}{42}}
+\newlabel{Cash.umask}{{3.6}{42}}
+\newlabel{Cash.setumask}{{3.6}{42}}
+\newlabel{Cash.withumask}{{3.6}{42}}
+\newlabel{Cash.chdir}{{3.6}{42}}
+\newlabel{Cash.cwd}{{3.6}{42}}
+\newlabel{Cash.withcwd}{{3.6}{42}}
+\newlabel{Cash.pid}{{3.6}{42}}
+\newlabel{Cash.parentpid}{{3.6}{43}}
+\newlabel{Cash.processgroup}{{3.6}{43}}
+\newlabel{Cash.setprocessgroup}{{3.6}{43}}
+\newlabel{Cash.setprocessgrouppid}{{3.6}{43}}
+\newlabel{Cash.prio}{{3.6}{43}}
+\newlabel{Cash.setpriority}{{3.6}{43}}
+\newlabel{Cash.setprioritypid}{{3.6}{43}}
+\newlabel{Cash.priority}{{3.6}{43}}
+\newlabel{Cash.prioritypid}{{3.6}{43}}
+\newlabel{Cash.nice}{{3.6}{43}}
+\newlabel{Cash.nicepid}{{3.6}{43}}
+\newlabel{Cash.userloginname}{{3.6}{43}}
+\newlabel{Cash.useruid}{{3.6}{43}}
+\newlabel{Cash.usereffectiveuid}{{3.6}{43}}
+\newlabel{Cash.usergid}{{3.6}{43}}
+\newlabel{Cash.usereffectivegid}{{3.6}{43}}
+\newlabel{Cash.usersupplementarygids}{{3.6}{43}}
+\newlabel{Cash.setuid}{{3.6}{43}}
+\newlabel{Cash.setgid}{{3.6}{43}}
+\newlabel{Cash.processtimes}{{3.6}{43}}
+\newlabel{Cash.processtimes}{{3.6}{44}}
+\newlabel{Cash.cputickspersec}{{3.6}{44}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}User and group database access}{44}}
+\newlabel{Cash.userinfo}{{3.7}{44}}
+\newlabel{Cash.userinfo}{{3.7}{44}}
+\newlabel{Cash.userinfoname}{{3.7}{44}}
+\newlabel{Cash.usernametouid}{{3.7}{44}}
+\newlabel{Cash.uidtousername}{{3.7}{44}}
+\newlabel{Cash.groupinfo}{{3.7}{44}}
+\newlabel{Cash.groupinfo}{{3.7}{45}}
+\newlabel{Cash.groupinfoname}{{3.7}{45}}
+\newlabel{Cash.groupnametogid}{{3.7}{45}}
+\newlabel{Cash.gidtogroupname}{{3.7}{45}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Accessing command-line arguments}{45}}
+\newlabel{Cash.commandlinearguments}{{3.8}{45}}
+\newlabel{Cash.commandline}{{3.8}{45}}
+\newlabel{Cash.makecommandlinearguments}{{3.8}{45}}
+\newlabel{Cash.arg}{{3.8}{45}}
+\newlabel{Cash.argstar}{{3.8}{45}}
+\newlabel{Cash.argv}{{3.8}{45}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.9}System parameters}{46}}
+\newlabel{Cash.systemname}{{3.9}{46}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.10}Signal system}{46}}
+\newlabel{Cash.signalprocess}{{3.10}{46}}
+\newlabel{Cash.signalprocesspid}{{3.10}{46}}
+\newlabel{Cash.signalprocessgroup}{{3.10}{47}}
+\newlabel{Cash.signalprocessgrouppgrp}{{3.10}{47}}
+\newlabel{Cash.itimer}{{3.10}{47}}
+\newlabel{Cash.itimerstatus}{{3.10}{47}}
+\newlabel{Cash.itimer}{{3.10}{47}}
+\newlabel{Cash.pauseuntilinterrupt}{{3.10}{47}}
+\newlabel{Cash.sleep}{{3.10}{47}}
+\newlabel{Cash.sleepuntil}{{3.10}{47}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.11}Time}{47}}
+\newlabel{time_date}{{3.11}{47}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.11.1}Terminology}{48}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.11.2}Basic data types}{48}}
+\newlabel{Cash.date}{{3.11.2}{48}}
+\newlabel{Cash.makedate}{{3.11.2}{49}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.11.3}Time zones}{49}}
+\newlabel{Cash.timezone}{{3.11.3}{49}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.11.4}Procedures}{50}}
+\newlabel{Cash.timeplusticks}{{3.11.4}{50}}
+\newlabel{Cash.tickspersec}{{3.11.4}{50}}
+\newlabel{Cash.date}{{3.11.4}{50}}
+\newlabel{Cash.dateoftime}{{3.11.4}{50}}
+\newlabel{Cash.time}{{3.11.4}{50}}
+\newlabel{Cash.timeofdate}{{3.11.4}{50}}
+\newlabel{Cash.stringofdate}{{3.11.4}{51}}
+\newlabel{Cash.formatdate}{{3.11.4}{51}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.12}Environment variables}{52}}
+\newlabel{Cash.getenv}{{3.12}{52}}
+\newlabel{Cash.setenv}{{3.12}{52}}
+\newlabel{Cash.alistofenv}{{3.12}{52}}
+\newlabel{Cash.setenvfromalist}{{3.12}{53}}
+\newlabel{Cash.alistdelete}{{3.12}{53}}
+\newlabel{Cash.alistupdate}{{3.12}{53}}
+\newlabel{Cash.alistcompress}{{3.12}{53}}
+\newlabel{Cash.withenv}{{3.12}{53}}
+\newlabel{Cash.withtotalenv}{{3.12}{53}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.12.1}Path lists and colon lists}{54}}
+\newlabel{Cash.addbefore}{{3.12.1}{54}}
+\newlabel{Cash.addafter}{{3.12.1}{54}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.12.2}\$USER, \$HOME, and \$PATH}{54}}
+\newlabel{Cash.homedirectory}{{3.12.2}{54}}
+\newlabel{Cash.execpathlist}{{3.12.2}{55}}
+\newlabel{Cash.setexecpathlist}{{3.12.2}{55}}
+\newlabel{Cash.withexecpathlist}{{3.12.2}{55}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.13}Terminal device control}{55}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.13.1}Portability across OS variants}{55}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.13.2}Miscellaneous procedures}{56}}
+\newlabel{Cash.isttyfd}{{3.13.2}{56}}
+\newlabel{Cash.isttyin}{{3.13.2}{56}}
+\newlabel{Cash.isttyout}{{3.13.2}{56}}
+\newlabel{Cash.ttyfilenamefd}{{3.13.2}{56}}
+\newlabel{Cash.ttyfilenamein}{{3.13.2}{56}}
+\newlabel{Cash.ttyfilenameout}{{3.13.2}{56}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.13.3}The tty\_info record type}{56}}
+\newlabel{Cash.ttyinfo}{{3.13.3}{56}}
+\@writefile{toc}{\contentsline {paragraph}{The control-characters string}{57}}
+\newlabel{Cash.ttychars}{{3.13.3}{57}}
+\newlabel{Cash.ttychar}{{3.13.3}{58}}
+\newlabel{Cash.disablettychar}{{3.13.3}{58}}
+\@writefile{toc}{\contentsline {paragraph}{The flag fields}{59}}
+\newlabel{Cash.ttyin}{{3.13.3}{59}}
+\newlabel{Cash.ttyin}{{3.13.3}{60}}
+\newlabel{Cash.ttyout}{{3.13.3}{60}}
+\newlabel{Cash.ttyout}{{3.13.3}{63}}
+\newlabel{Cash.ttyc}{{3.13.3}{63}}
+\newlabel{Cash.ttyc}{{3.13.3}{65}}
+\newlabel{Cash.ttyl}{{3.13.3}{65}}
+\newlabel{Cash.ttyl}{{3.13.3}{67}}
+\@writefile{toc}{\contentsline {paragraph}{The speed fields}{67}}
+\@writefile{toc}{\contentsline {paragraph}{The min and time fields}{67}}
+\newlabel{Cash.makettyinfo}{{3.13.3}{67}}
+\@writefile{toc}{\contentsline {paragraph}{Using tty-info records}{67}}
+\newlabel{Cash.copyttyinfo}{{3.13.3}{67}}
+\newlabel{Cash.ttyinfofd}{{3.13.3}{68}}
+\newlabel{Cash.ttyinfoin}{{3.13.3}{68}}
+\newlabel{Cash.ttyinfoout}{{3.13.3}{68}}
+\newlabel{Cash.ttyinfofn}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfonowfd}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfonowin}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfonowout}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfonowfn}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfodrainfd}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfodrainin}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfodrainout}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfodrainfn}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfoflushfd}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfoflushin}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfoflushout}{{3.13.3}{68}}
+\newlabel{Cash.setttyinfoflushfn}{{3.13.3}{68}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.13.4}Other terminal-device procedures}{68}}
+\newlabel{Cash.sendttybreakfd}{{3.13.4}{68}}
+\newlabel{Cash.sendttybreakin}{{3.13.4}{68}}
+\newlabel{Cash.sendttybreakout}{{3.13.4}{68}}
+\newlabel{Cash.sendttybreakfn}{{3.13.4}{68}}
+\newlabel{Cash.drainttyfd}{{3.13.4}{69}}
+\newlabel{Cash.drainttyin}{{3.13.4}{69}}
+\newlabel{Cash.drainttyout}{{3.13.4}{69}}
+\newlabel{Cash.drainttyfn}{{3.13.4}{69}}
+\newlabel{Cash.flushttyinputfd}{{3.13.4}{69}}
+\newlabel{Cash.flushttyinputin}{{3.13.4}{69}}
+\newlabel{Cash.flushttyinputout}{{3.13.4}{69}}
+\newlabel{Cash.flushttyinputfn}{{3.13.4}{69}}
+\newlabel{Cash.flushttyoutputfd}{{3.13.4}{69}}
+\newlabel{Cash.flushttyoutputin}{{3.13.4}{69}}
+\newlabel{Cash.flushttyoutputout}{{3.13.4}{69}}
+\newlabel{Cash.flushttyoutputfn}{{3.13.4}{69}}
+\newlabel{Cash.flushttybothfd}{{3.13.4}{69}}
+\newlabel{Cash.flushttybothin}{{3.13.4}{69}}
+\newlabel{Cash.flushttybothout}{{3.13.4}{69}}
+\newlabel{Cash.flushttybothfn}{{3.13.4}{69}}
+\newlabel{Cash.startttyoutputfd}{{3.13.4}{69}}
+\newlabel{Cash.startttyoutputin}{{3.13.4}{69}}
+\newlabel{Cash.startttyoutputout}{{3.13.4}{69}}
+\newlabel{Cash.startttyoutputfn}{{3.13.4}{69}}
+\newlabel{Cash.stopttyoutputfd}{{3.13.4}{69}}
+\newlabel{Cash.stopttyoutputin}{{3.13.4}{69}}
+\newlabel{Cash.stopttyoutputout}{{3.13.4}{69}}
+\newlabel{Cash.stopttyoutputfn}{{3.13.4}{69}}
+\newlabel{Cash.startttyinputfd}{{3.13.4}{69}}
+\newlabel{Cash.startttyinputin}{{3.13.4}{69}}
+\newlabel{Cash.startttyinputout}{{3.13.4}{69}}
+\newlabel{Cash.startttyinputfn}{{3.13.4}{69}}
+\newlabel{Cash.stopttyinputfd}{{3.13.4}{69}}
+\newlabel{Cash.stopttyinputin}{{3.13.4}{69}}
+\newlabel{Cash.stopttyinputout}{{3.13.4}{69}}
+\newlabel{Cash.stopttyinputfn}{{3.13.4}{70}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.13.5}Control terminals, sessions, and terminal process groups}{70}}
+\newlabel{Cash.opencontrolttyin}{{3.13.5}{70}}
+\newlabel{Cash.opencontrolttyout}{{3.13.5}{70}}
+\newlabel{Cash.becomesessionleader}{{3.13.5}{70}}
+\newlabel{Cash.ttyprocessgroupfd}{{3.13.5}{70}}
+\newlabel{Cash.ttyprocessgroupin}{{3.13.5}{70}}
+\newlabel{Cash.ttyprocessgroupout}{{3.13.5}{70}}
+\newlabel{Cash.ttyprocessgroupfn}{{3.13.5}{70}}
+\newlabel{Cash.setttyprocessgroupfd}{{3.13.5}{70}}
+\newlabel{Cash.setttyprocessgroupin}{{3.13.5}{71}}
+\newlabel{Cash.setttyprocessgroupout}{{3.13.5}{71}}
+\newlabel{Cash.setttyprocessgroupfn}{{3.13.5}{71}}
+\newlabel{Cash.controlttyfilename}{{3.13.5}{71}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.13.6}Pseudo-terminals}{71}}
+\newlabel{Cash.forkptysession}{{3.13.6}{71}}
+\newlabel{Cash.openpty}{{3.13.6}{71}}
+\newlabel{Cash.ttynameofptyname}{{3.13.6}{71}}
+\newlabel{Cash.ptynameofttyname}{{3.13.6}{71}}
+\newlabel{Cash.makeptygenerator}{{3.13.6}{72}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Networking}{72}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Sockets}{72}}
+\newlabel{Cash.socketdomain}{{4.1}{72}}
+\newlabel{Cash.protocolfamily}{{4.1}{72}}
+\newlabel{Cash.sockettype}{{4.1}{73}}
+\newlabel{Cash.protocollevel}{{4.1}{73}}
+\newlabel{Cash.socket}{{4.1}{73}}
+\newlabel{Cash.createsocket}{{4.1}{73}}
+\newlabel{Cash.createsocketpair}{{4.1}{73}}
+\newlabel{Cash.closesocket}{{4.1}{73}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Socket addresses}{73}}
+\newlabel{Cash.inetaddr}{{4.2}{73}}
+\newlabel{Cash.inetaddrany}{{4.2}{74}}
+\newlabel{Cash.inetaddrloopback}{{4.2}{74}}
+\newlabel{Cash.inetaddrbroadcast}{{4.2}{74}}
+\newlabel{Cash.sockaddr}{{4.2}{74}}
+\newlabel{Cash.socketaddressofunixaddress}{{4.2}{74}}
+\newlabel{Cash.socketaddressofinternetaddress}{{4.2}{74}}
+\newlabel{Cash.sockaddrofhostandport}{{4.2}{74}}
+\newlabel{Cash.sockaddrofhostandservice}{{4.2}{74}}
+\newlabel{Cash.unixaddressofsocketaddress}{{4.2}{74}}
+\newlabel{Cash.internetaddressofsocketaddress}{{4.2}{74}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}High-level interface}{74}}
+\newlabel{Cash.socketconnect}{{4.3}{75}}
+\newlabel{Cash.bindlistenacceptloopunix}{{4.3}{75}}
+\newlabel{Cash.bindlistenacceptloopport}{{4.3}{75}}
+\newlabel{Cash.bindlistenacceptloopservice}{{4.3}{75}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Socket primitives}{75}}
+\newlabel{Cash.connectsocket}{{4.4}{75}}
+\newlabel{Cash.bindsocket}{{4.4}{76}}
+\newlabel{Cash.listensocket}{{4.4}{76}}
+\newlabel{Cash.acceptconnection}{{4.4}{76}}
+\newlabel{Cash.socketlocaladdress}{{4.4}{76}}
+\newlabel{Cash.socketremoteaddress}{{4.4}{76}}
+\newlabel{Cash.shutdowncommand}{{4.4}{76}}
+\newlabel{Cash.shutdownsocket}{{4.4}{76}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Performing input and output on sockets}{77}}
+\newlabel{Cash.msgflag}{{4.5}{77}}
+\newlabel{Cash.receivemessage}{{4.5}{77}}
+\newlabel{Cash.receivemessagebang}{{4.5}{77}}
+\newlabel{Cash.receivemessagepartial}{{4.5}{77}}
+\newlabel{Cash.receivemessagebangpartial}{{4.5}{77}}
+\newlabel{Cash.sendmessage}{{4.5}{77}}
+\newlabel{Cash.sendmessagepartial}{{4.5}{77}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Socket options}{77}}
+\newlabel{Cash.socketbooloption}{{4.6}{78}}
+\newlabel{Cash.socketintoption}{{4.6}{78}}
+\newlabel{Cash.socketoptintoption}{{4.6}{78}}
+\newlabel{Cash.socketfloatoption}{{4.6}{78}}
+\newlabel{Cash.socketoptionbool}{{4.6}{78}}
+\newlabel{Cash.setsocketoptionbool}{{4.6}{78}}
+\newlabel{Cash.socketoptionint}{{4.6}{78}}
+\newlabel{Cash.setsocketoptionint}{{4.6}{78}}
+\newlabel{Cash.socketoptionoptint}{{4.6}{78}}
+\newlabel{Cash.setsocketoptionoptint}{{4.6}{79}}
+\newlabel{Cash.socketoptionfloat}{{4.6}{79}}
+\newlabel{Cash.setsocketoptionfloat}{{4.6}{79}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Database-information entries}{79}}
+\newlabel{Cash.herror}{{4.7}{79}}
+\newlabel{Cash.Netdberror}{{4.7}{79}}
+\newlabel{Cash.hostinfo}{{4.7}{79}}
+\newlabel{Cash.hostinfoname}{{4.7}{79}}
+\newlabel{Cash.hostinfoaddr}{{4.7}{79}}
+\newlabel{Cash.networkinfo}{{4.7}{79}}
+\newlabel{Cash.networkinfoname}{{4.7}{80}}
+\newlabel{Cash.networkinfoaddr}{{4.7}{80}}
+\newlabel{Cash.serviceinfo}{{4.7}{80}}
+\newlabel{Cash.serviceinfoname}{{4.7}{80}}
+\newlabel{Cash.serviceinfoport}{{4.7}{80}}
+\newlabel{Cash.protocolinfo}{{4.7}{80}}
+\newlabel{Cash.protocolinfoname}{{4.7}{81}}
+\newlabel{Cash.protocolinfoport}{{4.7}{81}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Strings and characters}{81}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Manipulating file names}{81}}
+\newlabel{filenames}{{5.1}{81}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Terminology}{82}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Procedures}{82}}
+\newlabel{Cash.isfilenamedirectory}{{5.1.2}{82}}
+\newlabel{Cash.isfilenamenondirectory}{{5.1.2}{82}}
+\newlabel{Cash.filenameasdirectory}{{5.1.2}{83}}
+\newlabel{Cash.directoryasfilename}{{5.1.2}{83}}
+\newlabel{Cash.isfilenameabsolute}{{5.1.2}{83}}
+\newlabel{Cash.filenamedirectory}{{5.1.2}{83}}
+\newlabel{Cash.filenamenondirectory}{{5.1.2}{83}}
+\newlabel{Cash.splitfilename}{{5.1.2}{84}}
+\newlabel{Cash.filenameofpathlist}{{5.1.2}{84}}
+\newlabel{Cash.filenameextension}{{5.1.2}{84}}
+\newlabel{Cash.filenamesansextension}{{5.1.2}{84}}
+\newlabel{Cash.parsefilename}{{5.1.2}{85}}
+\newlabel{Cash.replaceextension}{{5.1.2}{85}}
+\newlabel{Cash.simplifyfilename}{{5.1.2}{85}}
+\newlabel{Cash.resolvefilename}{{5.1.2}{85}}
+\newlabel{Cash.expandfilename}{{5.1.2}{85}}
+\newlabel{Cash.absolutefilename}{{5.1.2}{85}}
+\newlabel{Cash.homedir}{{5.1.2}{85}}
+\newlabel{Cash.homefile}{{5.1.2}{86}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.3}Other string manipulation facilities}{86}}
+\newlabel{Cash.substituteenvvars}{{5.1.3}{86}}
+\newlabel{Cash.index}{{5.1.3}{86}}
+\newlabel{Cash.rindex}{{5.1.3}{86}}
+\newlabel{Cash.substring}{{5.1.3}{86}}
+\newlabel{Cash.xsubstring}{{5.1.3}{86}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.4}Character predicates}{86}}
+\newlabel{Cash.isletter}{{5.1.4}{86}}
+\newlabel{Cash.islowercase}{{5.1.4}{86}}
+\newlabel{Cash.isuppercase}{{5.1.4}{86}}
+\newlabel{Cash.istitlecase}{{5.1.4}{87}}
+\newlabel{Cash.isdigit}{{5.1.4}{87}}
+\newlabel{Cash.isletterordigit}{{5.1.4}{87}}
+\newlabel{Cash.isgraphic}{{5.1.4}{87}}
+\newlabel{Cash.isprinting}{{5.1.4}{87}}
+\newlabel{Cash.iswhitespace}{{5.1.4}{87}}
+\newlabel{Cash.isblank}{{5.1.4}{87}}
+\newlabel{Cash.isisocontrol}{{5.1.4}{87}}
+\newlabel{Cash.ispunctuation}{{5.1.4}{87}}
+\newlabel{Cash.ishexdigit}{{5.1.4}{87}}
+\newlabel{Cash.isascii}{{5.1.4}{87}}
+\newlabel{Cash.isalphabetic}{{5.1.4}{87}}
+\newlabel{Cash.isalphanumeric}{{5.1.4}{87}}
+\newlabel{Cash.isnumeric}{{5.1.4}{87}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Reading delimited strings}{87}}
+\newlabel{rdelim}{{6}{87}}
+\newlabel{Cash.handledelim}{{6}{87}}
+\newlabel{Cash.terminationkind}{{6}{87}}
+\newlabel{Cash.readline}{{6}{88}}
+\newlabel{Cash.readlinesplit}{{6}{88}}
+\newlabel{Cash.readparagraph}{{6}{88}}
+\newlabel{Cash.readparagraphsplit}{{6}{88}}
+\newlabel{Cash.readdelimited}{{6}{88}}
+\newlabel{Cash.readdelimitedsplit}{{6}{88}}
+\newlabel{Cash.readdelimitedbang}{{6}{89}}
+\newlabel{Cash.readdelimitedbangsplit}{{6}{89}}
+\newlabel{Cash.lowreaddelimitedbang}{{6}{89}}
+\newlabel{Cash.skipcharset}{{6}{90}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Record I/O and field parsing}{90}}
+\newlabel{record_io_and_field_parsing}{{7}{90}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Reading records}{90}}
+\newlabel{Cash.recordreader}{{7.1}{90}}
+\newlabel{Cash.recordreadersplit}{{7.1}{90}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Parsing fields}{91}}
+\newlabel{field_splitter}{{7.2}{91}}
+\newlabel{Cash.handlefielddelim}{{7.2}{91}}
+\newlabel{Cash.delimmatcher}{{7.2}{91}}
+\newlabel{Cash.fieldsplitter}{{7.2}{92}}
+\newlabel{Cash.infixsplitter}{{7.2}{92}}
+\newlabel{Cash.suffixsplitter}{{7.2}{92}}
+\newlabel{Cash.sloppysuffixsplitter}{{7.2}{92}}
+\newlabel{Cash.defaultfieldmatcher}{{7.2}{92}}
+\newlabel{Cash.defaultinfixmatcher}{{7.2}{92}}
+\newlabel{Cash.defaultsuffixmatcher}{{7.2}{92}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.1}Field readers}{94}}
+\newlabel{Cash.fieldreader}{{7.2.1}{94}}
+\newlabel{Cash.defaultfieldparser}{{7.2.1}{95}}
+\newlabel{Cash.genfieldreader}{{7.2.1}{95}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.2}Forward-progress guarantees and empty-string matches}{96}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Running Cash}{96}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Making true executables}{97}}
+\newlabel{true_exec}{{8.1}{97}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Making bytecode-only executables}{97}}
+\newlabel{byte_exec}{{8.2}{97}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Cash scripts}{97}}
+\@writefile{toc}{\contentsline {paragraph}{Secondary argument syntax}{98}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Cash switches}{98}}

@@ -1,0 +1,323 @@
+This is TeX, Version 3.14159 (Web2C 7.2) (format=mllatex 1999.1.26)  28 AUG 2002 15:04
+MLTeX v2.2 enabled
+**/afs/inria.fr/common/usr/local/adm/src/cash/doc/doc.tex
+(/afs/inria.fr/common/usr/local/adm/src/cash/doc/doc.tex
+LaTeX2e <1997/12/01>
+(/usr/local/lib/tex/inputs/latex2e/base/article.cls
+Document Class: article 1997/06/16 v1.3v Standard LaTeX document class
+(/usr/local/lib/tex/inputs/latex2e/base/size11.clo
+File: size11.clo 1997/06/16 v1.3v Standard LaTeX file (size option)
+)
+\c@part=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
+\c@figure=\count88
+\c@table=\count89
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/lib/tex/inputs/latex2e/base/inputenc.sty beta test version
+Package: inputenc 1997/05/10 v0.9z Input encoding file (test version: still lia
+ble to change)
+
+(/usr/local/lib/tex/inputs/latex2e/base/latin1.def
+File: latin1.def 1997/05/10 v0.9z Input encoding file (test version: still liab
+le to change)
+))
+(/usr/local/lib/tex/inputs/latex2e/base/fontenc.sty
+Package: fontenc 1997/05/07 v1.9d Standard LaTeX package
+
+(/usr/local/lib/tex/inputs/latex2e/base/t1enc.def
+File: t1enc.def 1997/05/07 v1.9d Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 81.
+))
+(/usr/local/lib/tex/inputs/latex209/contrib/misc/fullpage.sty
+Style Option FULLPAGE Version 2 as of 15 Dec 1988
+) (/usr/local/lib/tex/inputs/latex2e/latex2html/url.sty
+Package: url 1996/02/06  ver 1.1  Verb mode for urls, email addresses, and file
+ names
+) (ocamldoc.sty
+Package: ocamldoc 2001/12/04 v1.0 ocamldoc support
+)
+(doc.aux
+
+LaTeX Warning: Label `Cash.autoreappolicy' multiply defined.
+
+
+LaTeX Warning: Label `Cash.waitany' multiply defined.
+
+
+LaTeX Warning: Label `Cash.processtimes' multiply defined.
+
+
+LaTeX Warning: Label `Cash.userinfo' multiply defined.
+
+
+LaTeX Warning: Label `Cash.groupinfo' multiply defined.
+
+
+LaTeX Warning: Label `Cash.itimer' multiply defined.
+
+
+LaTeX Warning: Label `Cash.date' multiply defined.
+
+
+LaTeX Warning: Label `Cash.ttyin' multiply defined.
+
+
+LaTeX Warning: Label `Cash.ttyout' multiply defined.
+
+
+LaTeX Warning: Label `Cash.ttyc' multiply defined.
+
+
+LaTeX Warning: Label `Cash.ttyl' multiply defined.
+
+)
+\openout1 = `doc.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+ (doc.toc
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 1.
+ (/usr/local/lib/tex/inputs/latex2e/base/t1cmtt.fd
+File: t1cmtt.fd 1997/06/16 v2.5e Standard LaTeX font definitions
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 2.
+ [1
+
+])
+\tf@toc=\write4
+\openout4 = `doc.toc'.
+
+ [2]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 97.
+
+(/usr/local/lib/tex/inputs/latex2e/base/omscmr.fd
+File: omscmr.fd 1997/06/16 v2.5e Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 97.
+
+Overfull \hbox (23.33852pt too wide) in paragraph at lines 99--104
+\T1/cmr/m/n/10.95 named \T1/cmtt/m/n/10.95 call_with_...\T1/cmr/m/n/10.95 , \T1
+/cmr/m/it/10.95 e.g.\T1/cmr/m/n/10.95 , \T1/cmtt/m/n/10.95 call_with_fdes_in \T
+1/cmr/m/it/10.95 in_channel proc\T1/cmr/m/n/10.95 , which calls \T1/cmr/m/it/10
+.95 proc \T1/cmr/m/n/10.95 on \T1/cmr/m/it/10.95 in_channel\T1/cmr/m/n/10.95 's
+
+ []
+
+
+Overfull \hbox (30.09229pt too wide) in paragraph at lines 113--116
+\T1/cmr/m/n/10.95 end in $[]$\T1/cmtt/m/n/10.95 _info\T1/cmr/m/n/10.95 . Ex-am-
+ples: \T1/cmtt/m/n/10.95 user_info_...\T1/cmr/m/n/10.95 , \T1/cmtt/m/n/10.95 fi
+le_info_...\T1/cmr/m/n/10.95 , \T1/cmtt/m/n/10.95 group_info_...\T1/cmr/m/n/10.
+95 , and \T1/cmtt/m/n/10.95 host_info_...\T1/cmr/m/n/10.95 . 
+ []
+
+[3]
+Overfull \hbox (35.85774pt too wide) in paragraph at lines 154--160
+[]\T1/cmr/m/n/10.95 There are sev-eral ex-cep-tions: \T1/cmtt/m/n/10.95 file-ex
+ists? \T1/cmr/m/n/10.95 be-comes the slightly more eu-phonic \T1/cmtt/m/n/10.95
+ is_file_existing_fn\T1/cmr/m/n/10.95 ,
+ []
+
+[4] [5] [6]
+Overfull \hbox (15.94812pt too wide) in paragraph at lines 526--526
+ []    \T1/cmtt/m/n/10.95 run_with_inchan_plus_proc (fun () -> exec_path "zcat"
+ ["tr91-145.tex.Z"]}) in[] 
+ []
+
+[7] [8] [9]
+Overfull \hbox (21.2989pt too wide) in paragraph at lines 868--873
+\T1/cmr/m/n/10.95 gu-ment, so \T1/cmr/m/it/10.95 e.g.\T1/cmr/m/n/10.95 , \T1/cm
+tt/m/n/10.95 stdout \T1/cmr/m/n/10.95 may be as-so-ci-ated to an-other file de-
+scrip-tor than 1. Use \T1/cmtt/m/n/10.95 (out_channel_of_fd 1)
+ []
+
+[10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24]
+[25] [26] [27] [28] [29]
+Overfull \hbox (4.97047pt too wide) in paragraph at lines 3966--3969
+[]\T1/cmr/m/n/10.95 The fol-low-ing \T1/cmtt/m/n/10.95 is_file_... \T1/cmr/m/n/
+10.95 pro-ce-dures are the log-i-cal nega-tion of the pre-ced-ing \T1/cmtt/m/n/
+10.95 is_file_not_...
+ []
+
+[30] [31]
+Overfull \hbox (15.94812pt too wide) in paragraph at lines 4341--4341
+ []    \T1/cmtt/m/n/10.95 glob ["/usr/man/man?/"]          => ["/usr/man/man1/"
+; "/usr/man/man2/"; ...][] 
+ []
+
+
+Overfull \hbox (15.94812pt too wide) in paragraph at lines 4351--4351
+ []    \T1/cmtt/m/n/10.95 glob ["../include/*"]      => ["../include/cig.h"; ".
+./include/decls.h"; ...][] 
+ []
+
+[32] [33] [34] [35] [36] [37]
+Overfull \hbox (10.28975pt too wide) in paragraph at lines 5018--5018
+ []   \T1/cmtt/m/n/10.95 print_endline (read_line stdin);;  (* Read the string 
+output by the child. *)[] 
+ []
+
+[38] [39] [40] [41] [42] [43] [44] [45]
+Overfull \hbox (15.94812pt too wide) in paragraph at lines 6109--6109
+ []        \T1/cmtt/m/n/10.95 exec_path "xterm" ["-n"; host; "-title"; host; "-
+name"; "xterm_" ^ host])[] 
+ []
+
+
+Overfull \hbox (27.26486pt too wide) in paragraph at lines 6116--6116
+ []           \T1/cmtt/m/n/10.95 ("-n" :: title :: "-title" :: title :: "-e" ::
+ !command_line_arguments))[] 
+ []
+
+[46] [47] [48] [49] [50] [51] [52]
+Overfull \hbox (21.60649pt too wide) in paragraph at lines 6953--6953
+ []    \T1/cmtt/m/n/10.95 alist-compress [(1, a); (2, b); (1, c); (3, d)]    =>
+ [(1, a); (2, b); (3, d)][] 
+ []
+
+[53]
+Overfull \hbox (5.54817pt too wide) in paragraph at lines 7037--7037
+[]           \T1/cmtt/m/n/10.95 (fun () -> exec_path_with_env "mail" ~env:env2 
+["shivers@cs.cmu.edu"]));;[] 
+ []
+
+
+Overfull \hbox (11.20654pt too wide) in paragraph at lines 7059--7059
+[] \T1/cmtt/m/n/10.95 split "/sbin:/bin::/usr/bin"                    => ["/sbi
+n"; "/bin"; ""; "/usr/bin"][] 
+ []
+
+
+Overfull \hbox (11.20654pt too wide) in paragraph at lines 7060--7060
+[] \T1/cmtt/m/n/10.95 String.concat ":"  ["/sbin"; "/bin"; ""; "/usr/bin"]     
+  => "/sbin:/bin::/usr/bin"[] 
+ []
+
+[54] [55] [56] [57]
+Overfull \hbox (26.59883pt too wide) in paragraph at lines 7621--7625
+ \T1/cmr/bx/n/10.95 The flag fields[] \T1/cmr/m/n/10.95 The \T1/cmtt/m/n/10.95 
+tty_info \T1/cmr/m/n/10.95 record's \T1/cmtt/m/n/10.95 input_flags\T1/cmr/m/n/1
+0.95 , \T1/cmtt/m/n/10.95 output_flags\T1/cmr/m/n/10.95 , \T1/cmtt/m/n/10.95 co
+ntrol_flags\T1/cmr/m/n/10.95 , and \T1/cmtt/m/n/10.95 local_flags
+ []
+
+[58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70] [71] [72]
+[73] [74] [75] [76] [77] [78] [79] [80]
+Overfull \hbox (21.60847pt too wide) in paragraph at lines 10578--10586
+\T1/cmr/m/n/10.95 (html)[$\T1/cmtt/m/n/10.95 http : / / srfi . schemers . org /
+ srfi-[]13 / srfi-[]13 . html $\T1/cmr/m/n/10.95 ] and (text)[$\T1/cmtt/m/n/10.
+95 http : / / srfi . schemers .
+ []
+
+
+Overfull \hbox (0.37512pt too wide) in paragraph at lines 10591--10599
+\T1/cmr/m/n/10.95 URLs (html)[$\T1/cmtt/m/n/10.95 http : / / srfi . schemers . 
+org / srfi-[]14 / srfi-[]14 . html $\T1/cmr/m/n/10.95 ] and (text)[$\T1/cmtt/m/
+n/10.95 http : / / srfi .
+ []
+
+[81] [82] [83]
+Overfull \hbox (4.63138pt too wide) in paragraph at lines 10866--10866
+ []   \T1/cmtt/m/n/10.95 split_file_name "/src/des/main.c"            => [""; "
+src"; "des"; "main.c"][] 
+ []
+
+
+Overfull \hbox (10.28975pt too wide) in paragraph at lines 10897--10897
+ []                                                \T1/cmtt/m/n/10.95 => "/usr/
+shivers/src/des/main.c"[] 
+ []
+
+[84] [85] [86] [87] [88] [89] [90]
+Overfull \hbox (15.94812pt too wide) in paragraph at lines 11799--11799
+ []    \T1/cmtt/m/n/10.95 let read = record_reader ?delims:None ?elide_delims:N
+one ~handle_delim:Concat[] 
+ []
+
+[91] [92] [93]
+Overfull \hbox (16.86491pt too wide) in paragraph at lines 12169--12169
+[]\T1/cmtt/m/n/10.95 "foo:bar"         error             ["foo"; "bar"]    ["fo
+o"; "bar"]    ["foo"; "bar"][] 
+ []
+
+[94]
+Overfull \hbox (44.23997pt too wide) in paragraph at lines 12217--12217
+ []\T1/cmtt/m/n/10.95 ["dalbertz"; "mx3Uaqq0"; "107"; "22"; "David Albertz"; "/
+users/dalbertz"; "/bin/csh"])[] 
+ []
+
+
+Overfull \hbox (33.84003pt too wide) in paragraph at lines 12271--12271
+[]      \T1/cmtt/m/n/10.95 field_reader ~field_parser:(infix_splitter ~delim:(S
+tring ":") ~num_fields:7 ()) ()[] 
+ []
+
+
+Overfull \hbox (50.81514pt too wide) in paragraph at lines 12276--12276
+[]      \T1/cmtt/m/n/10.95 field_reader ~field_parser:(infix_splitter ~delim:(P
+attern "\s+") ~num_fields:8 ()) ()[] 
+ []
+
+
+Overfull \hbox (67.79025pt too wide) in paragraph at lines 12280--12280
+[]      \T1/cmtt/m/n/10.95 field_reader ~field_parser:(infix_splitter ~delim:(P
+attern "\s+") ~num_fields:(-7) ()) ()[] 
+ []
+
+
+Overfull \hbox (62.13188pt too wide) in paragraph at lines 12290--12290
+[]      \T1/cmtt/m/n/10.95 field_reader ~field_parser:(field_splitter ~field:(P
+attern "[^.]+") ~num_fields:4 ()) ()[] 
+ []
+
+[95]
+Overfull \hbox (67.79025pt too wide) in paragraph at lines 12303--12303
+[]      \T1/cmtt/m/n/10.95 fun chan -> let (record, fields) = (read chan) in (r
+ecord, List.map int_of_string fields)[] 
+ []
+
+
+Overfull \hbox (10.60631pt too wide) in paragraph at lines 12367--12369
+[]\T1/cmr/m/n/10.95 Cash can also be in-voked as the in-ter-preter for a shell 
+script by putting a ``[]\T1/cmtt/m/n/10.95 #!/usr/local/bin/cash\T1/cmr/m/n/10.
+95 ''
+ []
+
+[96] [97] [98] [99] (doc.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 971 strings out of 50769
+ 16791 string characters out of 697324
+ 59812 words of memory out of 263001
+ 4070 multiletter control sequences out of 10000+65535
+ 12330 words of font info for 32 fonts, out of 200000 for 1000
+ 15 hyphenation exceptions out of 1000
+ 22i,5n,21p,333b,629s stack positions out of 300i,100n,500p,30000b,4000s
+
+Output written on doc.dvi (99 pages, 298772 bytes).

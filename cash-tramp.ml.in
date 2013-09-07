@@ -1,0 +1,210 @@
+(* @configure_input@ *)
+(***********************************************************************)
+(*                                Cash                                 *)
+(*                                                                     *)
+(*          Bruno Verlyck, projet Cristal, INRIA Rocquencourt          *)
+(*                                                                     *)
+(*  Copyright 2002 Institut National de Recherche en Informatique et   *)
+(*  en Automatique.  All rights reserved.  This file is distributed    *)
+(*  under the terms of the GNU Lesser General Public License.          *)
+(*                                                                     *)
+(*  Cash is based on Scsh, by Olin Shivers.                            *)
+(***********************************************************************)
+
+value bindir = "@BINDIR@/";
+
+type process_status =
+  Unix.process_status ==
+    [ WEXITED of int
+    | WSIGNALED of int
+    | WSTOPPED of int ]
+;
+
+type wait_flag =
+  Unix.wait_flag ==
+    [ WNOHANG
+    | WUNTRACED ]
+;
+
+external execv : string -> array string -> 'a = "unix_execv";
+external fork : unit -> int = "unix_fork";
+external waitpid : list wait_flag -> int -> (int * process_status) = "unix_waitpid";
+external in_channel_of_descr : int -> in_channel = "caml_open_descriptor_in";
+
+value print_exec args =
+  do {
+    prerr_string ("exec: " ^ args.(0) ^ " [ ");
+    Array.iter (fun arg -> do { prerr_char '"'; prerr_string arg; prerr_string "\" " })
+      args;
+    prerr_endline "]"
+  }
+;
+
+value do_exec_1 first_args args_i quiet =
+  let args_left = Array.sub Sys.argv args_i (Array.length Sys.argv - args_i) in
+  let args = Array.append first_args args_left in
+  do { if quiet then () else print_exec args; execv args.(0) args; exit 2 }
+;
+
+value do_exec top_path i = do_exec_1 [| top_path |] i;
+
+value explode_prepend s =
+  loop (pred (String.length s)) where rec loop i r =
+    if i < 0 then r else loop (pred i) [s.[i] :: r]
+;
+
+value rev_implode l =
+  let len = List.length l in
+  let s = String.create len in
+  let rec loop i =
+    fun
+    [ [] -> s
+    | [c :: cs] -> do { s.[i] := c; loop (pred i) cs } ]
+  in
+  loop (pred len) l
+;
+
+(* Read in one backslashed char.  Return it with the rest of chars -- this is in
+   case of extension of \char to \sequence (\023, e.g.) *)
+value read_backslash_sequence =
+  let assoc_chars =
+    [('n', '\n'); ('r', '\r'); ('t', '\t'); ('b', '\b'); ('a', Char.chr 07);
+     ('f', Char.chr 12); ('v', Char.chr 11); ('\\', '\\'); ('\t', '\t'); (' ', ' ')]
+  in
+  fun
+  [ [] -> failwith "Premature EOL within backslash-sequence in 2nd line of script"
+  | [c :: rest] ->
+      if List.mem_assoc c assoc_chars then (rest, List.assoc c assoc_chars)
+      else
+        failwith
+          ("Illegal \\" ^ String.make 1 c ^ " escape sequence in 2nd line of script") ]
+;
+
+(* Read in one secondary arg, but not its delimiting space.  Return rest of
+   exploded line, too. *)
+value read_additional_arg =
+  loop [] where rec loop arg_chars =
+    fun
+    [ [] | [' ' :: _] as rest -> (rest, rev_implode arg_chars)
+    | ['\t' :: _] -> failwith "Illegal tab character in 2nd line of script"
+    | ['\\' :: rest] ->
+        let (rest, c) = read_backslash_sequence rest in
+        loop [c :: arg_chars] rest
+    | [c :: rest] -> loop [c :: arg_chars] rest ]
+;
+
+value read_additional_args line =
+  loop (explode_prepend line []) [] where rec loop chars args =
+    let (rest, arg) = read_additional_arg chars in
+    let args = [arg :: args] in
+    match rest with
+    [ [] -> List.rev args
+    | [_ :: rest] -> loop rest args ]
+;
+
+value exec_cash quiet top_path args_i =
+  fun
+  [ None ->
+      if args_i < Array.length Sys.argv then
+        let src = open_in Sys.argv.(args_i) in
+        try
+          let _ = input_line src in
+          let l2 = input_line src in
+          if input_line src <> "!#" then raise End_of_file
+          else
+            let args = read_additional_args l2 in
+            do_exec_1 (Array.of_list [top_path :: args]) args_i quiet
+        with
+        [ End_of_file -> do { close_in src; do_exec top_path args_i quiet } ]
+      else do_exec top_path args_i quiet
+  | Some source ->
+      let src = Filename.temp_file "cash-e-" "" in
+      let out = open_out src in
+      do {
+        if quiet then () else prerr_endline ("temp_file: " ^ src);
+        output_string out source;
+        close_out out;
+        let args_i = pred args_i;
+        Sys.argv.(args_i) := src;
+        let pid = fork ();
+        if pid = 0 then do_exec top_path args_i quiet
+        else do {
+          if quiet then () else prerr_endline ("waiting child " ^ string_of_int pid);
+          let (_, status) = waitpid [] pid;
+          if quiet then try Sys.remove src with _ -> ()
+          else prerr_endline ("would remove: " ^ src);
+          match status with
+          [ WEXITED i -> exit i
+          | WSIGNALED i -> exit (128 + i)
+          | WSTOPPED i ->
+              do {
+                prerr_endline ("cashtop stopped by signal " ^ string_of_int i ^ "??");
+                exit i
+              } ]
+        }
+      } ]
+;
+
+(* XXX Sys.argv.(0) is set by readlink /proc/self/exe which may be "[dev]:ino". *)
+(*
+value last_char s =
+  let c = s.[pred (String.length s)] in
+  do {
+    print_string "last_char ";
+    print_string s;
+    print_string " -> ";
+    print_char c;
+    print_newline ();
+    c
+  }
+; *)
+
+value last_char s = s.[pred (String.length s)];
+
+value main () =
+  let quiet = ref True
+  and code = ref None
+  and args_i = ref 1
+  and top_name = ref "cashtop" in
+  let rest_args from = do { args_i.val := from; Arg.current.val := Array.length Sys.argv }
+  and advance_and thunk () = do { args_i.val := succ Arg.current.val; thunk () }
+  and set_casher () = top_name.val := "cashrtop"
+  and set_verbose () = quiet.val := False
+  and get_code s =
+    do {
+      args_i.val := Arg.current.val + 2;
+      match code.val with
+      [ None -> code.val := Some s
+      | Some phrase -> code.val := Some (phrase ^ s) ]
+    }
+  in
+  let slurp_fd fd =
+    let ichan = in_channel_of_descr fd in
+    let lines =
+      loop [] where rec loop lines =
+        try loop [input_line ichan :: lines] with [ End_of_file -> List.rev lines ]
+    in
+    get_code (String.concat "\n" lines)
+  in
+  let usage = "Usage: cash [switches] [--] [scriptfile] [arguments]\nswitches are:" in
+  let rec help () = do { Arg.usage arg_spec usage; exit 0 }
+  and arg_spec =
+    [("-r", Arg.Unit (advance_and set_casher), "\t\tuse revised syntax");
+     ("-v", Arg.Unit (advance_and set_verbose),
+      "\t\ttell about syscalls; and don't unlink -c tempfile");
+     ("-c", Arg.String get_code,
+      "<code>\texecute code. Several -c allowed. Omit <scriptfile>");
+     ("-sfd", Arg.Int slurp_fd,
+      "<num>\tlike -c, but code is read on file descriptor num");
+     ("-help", Arg.Unit help, "\tdisplay this list of options, then exit");
+     ("--", Arg.Unit (fun () -> rest_args (succ Arg.current.val)), "\t\tend my switches")]
+  in
+  do {
+    if Array.length Sys.argv > 0 && last_char Sys.argv.(0) = 'r' then set_casher ()
+    else ();
+    Arg.parse arg_spec (fun _ -> rest_args Arg.current.val) usage;
+    exec_cash quiet.val (bindir ^ top_name.val) args_i.val code.val
+  }
+;
+
+if Sys.interactive.val then () else main ();

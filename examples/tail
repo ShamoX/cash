@@ -1,0 +1,29 @@
+#!/usr/local/adm/src/caml/bin/cashr
+
+open Cash;
+
+value tail_plus skip nlines =
+  try
+    do {
+      (* set_chan_buffering_in Nobuf stdin; *)
+      for i = 0 to skip do { ignore (read_line stdin) };
+      for i = 0 to nlines do { print_string (read_line ~handle_newline:Concat stdin) }
+    }
+  with
+  [ End_of_file -> () ]
+;
+
+value tail_plus_from_sh () =
+  let skip = ref 0
+  and nlines = ref max_int in
+  let spec =
+    [("-skip", Arg.Int (fun n -> skip.val := n), "\tnumber of lines to skip initially");
+     ("-n", Arg.Int (fun n -> nlines.val := n), "\t\tmaximum number of lines to print")]
+  and usage = "Usage: tail+ {-skip #} {-n #}" in
+  do {
+    Arg.parse spec (fun arg -> Arg.usage spec usage) usage;
+    tail_plus (pred skip.val) (pred nlines.val)
+  }
+;
+
+if Sys.interactive.val then() else tail_plus_from_sh ();

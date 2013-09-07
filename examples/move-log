@@ -1,0 +1,132 @@
+#!/usr/local/bin/cashr
+(*
+ * for each AFS log in /usr/afs/logs, monitors TheAfsLog, and saves each
+ * new line in TheAfsLog.log.  Monitors TheAfsLog being renamed in
+ * TheAfsLog.old every while by AFS, to save the new TheAfsLog instead.
+ *)
+open Cash;
+
+type log_file =
+  { name : string;                    (* log file name *)
+    log_chan: mutable in_channel;     (* log file channel *)
+    outlog_chan : mutable out_channel;(* output (.log) channel *)
+    info : mutable file_info }        (* log file info *)
+;	
+
+type signals =
+  [ Continue
+  | Exit
+  | Restart ]
+;
+value exit_status = ref Continue;
+
+value logs_dir = "/usr/afs/logs";
+value pid_file = "/etc/move-log.pid";
+value logs_list =
+  ["AuthLog"; "SalvageLog"; "VLLog"; "BackupLog"; "BosLog"; "VolserLog";
+   "FileLog"; "PtLog"]
+;
+
+value store_pid () =
+  with_output_to_file pid_file
+    (fun () -> print_endline (string_of_int (pid ())))
+;
+
+value exit_if_already_running () =
+  if is_file_existing_fn pid_file then
+    failwith
+      (Printf.sprintf "%s already exists: exiting...\n" pid_file)
+  else ()
+;
+
+value open_output_log f_name =
+  open_out_gen [Open_wronly; Open_creat; Open_append] 0o00644
+    (f_name ^ ".log")
+;
+
+value create_descriptors f_name =
+  let log_chan = open_in f_name in
+  {name = f_name; log_chan = log_chan; outlog_chan = open_output_log f_name;
+   info = file_info_in log_chan}
+;
+
+value close_log f =
+  do { ignore (close_in f.log_chan); ignore (close_out f.outlog_chan) }
+;
+
+value cat_log_file f =
+  do {
+    fold_input (fun () line -> output_string f.outlog_chan line) ()
+      (read_line ~handle_newline:Concat) f.log_chan;
+    flush f.outlog_chan
+  }
+;
+
+value handle_signal_with f s = Sys.set_signal s (Sys.Signal_handle f);
+
+value clean_restart s = exit_status.val := Restart;
+
+value clean_exit s = exit_status.val := Exit;
+
+value cat_if_changed f =
+  let f_info = file_info_fn f.name in
+  do {
+    if f_info.st_ino != f.info.st_ino then do {
+      (* in case something was added before renaming *)
+      cat_log_file f;
+      ignore (close_in f.log_chan);
+      f.log_chan := open_in f.name;
+      cat_log_file f
+    }
+    else if f_info.st_size <= f.info.st_size then ()
+    else cat_log_file f;
+    f.info := f_info
+  }
+;
+
+value logsave_loop log_files =
+  while exit_status.val != Exit do {
+    if exit_status.val = Restart then do {
+      List.iter
+        (fun f ->
+           (* reopen_output_file. *)
+           let () = close_out f.outlog_chan in
+           f.outlog_chan := open_output_log f.name)
+        log_files;
+      exit_status.val := Continue
+    }
+    else ();
+    sleep 1;
+    List.iter cat_if_changed log_files
+  }
+;
+
+value signals_to_restart = [Sys.sighup];
+value signals_to_exit = [Sys.sigint; Sys.sigquit; Sys.sigterm; Sys.sigtstp];
+
+value move_from_sh () =
+  do {
+    exit_if_already_running ();
+    store_pid ();
+    (* Initialize signals. *)
+    List.iter (handle_signal_with clean_restart) signals_to_restart;
+    List.iter (handle_signal_with clean_exit) signals_to_exit;
+    (* adding path to log files names *)
+    let logs_path_list =
+      List.map (absolute_file_name ~dir:logs_dir) logs_list
+    in
+    (* looking for existing files *)
+    let existing_logs_list = List.filter is_file_existing_fn logs_path_list in
+    (* opening file descriptors *)
+    let log_files = List.map create_descriptors existing_logs_list in
+    (* doing a first dump of each log file, before waiting for new lines *)
+    List.iter cat_log_file log_files;
+    (* going in the loop that tail-f's log files *)
+    logsave_loop log_files;
+    (* cleaning up *)
+    List.iter close_log log_files;
+    delete_file pid_file
+  }
+;
+
+if Sys.interactive.val then () else Unix.handle_unix_error move_from_sh ();

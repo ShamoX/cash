@@ -1,0 +1,81 @@
+\contentsline {section}{\numberline {1}Module {\tt {Cash}} : The Caml Shell}{2}
+\contentsline {subsection}{\numberline {1.1}Copyright \& source-code license}{3}
+\contentsline {subsection}{\numberline {1.2}Caveats}{3}
+\contentsline {subsection}{\numberline {1.3}Naming conventions}{3}
+\contentsline {subsubsection}{\numberline {1.3.1}Common naming conventions}{3}
+\contentsline {subsubsection}{\numberline {1.3.2}Cash own naming conventions}{4}
+\contentsline {subsection}{\numberline {1.4}A word about Unix standards}{4}
+\contentsline {section}{\numberline {2}Process notation}{5}
+\contentsline {subsection}{\numberline {2.1}Procedures and syntax extensions}{5}
+\contentsline {subsection}{\numberline {2.2}Interfacing process output to Caml}{5}
+\contentsline {subsection}{\numberline {2.3}More complex process operations}{7}
+\contentsline {subsection}{\numberline {2.4}Multiple stream capture}{7}
+\contentsline {subsection}{\numberline {2.5}Process filters}{8}
+\contentsline {section}{\numberline {3}System calls}{8}
+\contentsline {subsection}{\numberline {3.1}Errors}{9}
+\contentsline {subsection}{\numberline {3.2}I/O}{9}
+\contentsline {subsubsection}{\numberline {3.2.1}Pervasives I/O operations}{9}
+\contentsline {subsubsection}{\numberline {3.2.2}Channel manipulation and standard channels}{9}
+\contentsline {subsubsection}{\numberline {3.2.3}String channels}{11}
+\contentsline {subsubsection}{\numberline {3.2.4}Revealed channels and file descriptors}{11}
+\contentsline {subsubsection}{\numberline {3.2.5}Channel-mapping machinery}{14}
+\contentsline {subsubsection}{\numberline {3.2.6}Unix I/O}{15}
+\contentsline {subsubsection}{\numberline {3.2.7}Buffered I/O}{23}
+\contentsline {subsection}{\numberline {3.3}File system}{24}
+\contentsline {subsection}{\numberline {3.4}Directories, globbing and temp files}{31}
+\contentsline {subsection}{\numberline {3.5}Processes}{36}
+\contentsline {subsubsection}{\numberline {3.5.1}Process objects and process reaping}{39}
+\contentsline {paragraph}{Issues with process reaping}{40}
+\contentsline {subsubsection}{\numberline {3.5.2}Process waiting}{41}
+\contentsline {subsubsection}{\numberline {3.5.3}Analysing process status codes}{42}
+\contentsline {subsection}{\numberline {3.6}Process state}{42}
+\contentsline {subsection}{\numberline {3.7}User and group database access}{44}
+\contentsline {subsection}{\numberline {3.8}Accessing command-line arguments}{45}
+\contentsline {subsection}{\numberline {3.9}System parameters}{46}
+\contentsline {subsection}{\numberline {3.10}Signal system}{46}
+\contentsline {subsection}{\numberline {3.11}Time}{47}
+\contentsline {subsubsection}{\numberline {3.11.1}Terminology}{48}
+\contentsline {subsubsection}{\numberline {3.11.2}Basic data types}{48}
+\contentsline {subsubsection}{\numberline {3.11.3}Time zones}{49}
+\contentsline {subsubsection}{\numberline {3.11.4}Procedures}{50}
+\contentsline {subsection}{\numberline {3.12}Environment variables}{52}
+\contentsline {subsubsection}{\numberline {3.12.1}Path lists and colon lists}{54}
+\contentsline {subsubsection}{\numberline {3.12.2}\$USER, \$HOME, and \$PATH}{54}
+\contentsline {subsection}{\numberline {3.13}Terminal device control}{55}
+\contentsline {subsubsection}{\numberline {3.13.1}Portability across OS variants}{55}
+\contentsline {subsubsection}{\numberline {3.13.2}Miscellaneous procedures}{56}
+\contentsline {subsubsection}{\numberline {3.13.3}The tty\_info record type}{56}
+\contentsline {paragraph}{The control-characters string}{57}
+\contentsline {paragraph}{The flag fields}{59}
+\contentsline {paragraph}{The speed fields}{67}
+\contentsline {paragraph}{The min and time fields}{67}
+\contentsline {paragraph}{Using tty-info records}{67}
+\contentsline {subsubsection}{\numberline {3.13.4}Other terminal-device procedures}{68}
+\contentsline {subsubsection}{\numberline {3.13.5}Control terminals, sessions, and terminal process groups}{70}
+\contentsline {subsubsection}{\numberline {3.13.6}Pseudo-terminals}{71}
+\contentsline {section}{\numberline {4}Networking}{72}
+\contentsline {subsection}{\numberline {4.1}Sockets}{72}
+\contentsline {subsection}{\numberline {4.2}Socket addresses}{73}
+\contentsline {subsection}{\numberline {4.3}High-level interface}{74}
+\contentsline {subsection}{\numberline {4.4}Socket primitives}{75}
+\contentsline {subsection}{\numberline {4.5}Performing input and output on sockets}{77}
+\contentsline {subsection}{\numberline {4.6}Socket options}{77}
+\contentsline {subsection}{\numberline {4.7}Database-information entries}{79}
+\contentsline {section}{\numberline {5}Strings and characters}{81}
+\contentsline {subsection}{\numberline {5.1}Manipulating file names}{81}
+\contentsline {subsubsection}{\numberline {5.1.1}Terminology}{82}
+\contentsline {subsubsection}{\numberline {5.1.2}Procedures}{82}
+\contentsline {subsubsection}{\numberline {5.1.3}Other string manipulation facilities}{86}
+\contentsline {subsubsection}{\numberline {5.1.4}Character predicates}{86}
+\contentsline {section}{\numberline {6}Reading delimited strings}{87}
+\contentsline {section}{\numberline {7}Record I/O and field parsing}{90}
+\contentsline {subsection}{\numberline {7.1}Reading records}{90}
+\contentsline {subsection}{\numberline {7.2}Parsing fields}{91}
+\contentsline {subsubsection}{\numberline {7.2.1}Field readers}{94}
+\contentsline {subsubsection}{\numberline {7.2.2}Forward-progress guarantees and empty-string matches}{96}
+\contentsline {section}{\numberline {8}Running Cash}{96}
+\contentsline {subsection}{\numberline {8.1}Making true executables}{97}
+\contentsline {subsection}{\numberline {8.2}Making bytecode-only executables}{97}
+\contentsline {subsection}{\numberline {8.3}Cash scripts}{97}
+\contentsline {paragraph}{Secondary argument syntax}{98}
+\contentsline {subsection}{\numberline {8.4}Cash switches}{98}

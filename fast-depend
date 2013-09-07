@@ -1,0 +1,34 @@
+:
+case $1 in -x)shift; set -x;; esac
+
+: $BASH
+case $BASH in
+'')	exec bash -$- $0 "$@";;
+esac
+
+set -e
+[ -d DEPS ] || mkdir DEPS
+PFX=DEPS/
+DEPS=
+include=
+INCLS=
+for i do
+	case $include in
+	get)	INCLS=$INCLS" -I "$i include=;;
+	*)	j=$i
+		case $i in
+		-I)	include=get dep=;;
+		*.mli)	dep=DEPS/`basename $i .mli`.idep;;
+		*.ml)	dep=DEPS/`basename $i .ml`.dep; j=${i}i; [ -f $j ] || j=$i;;
+		esac
+		if [ -z "$dep" -o \( "$dep" -nt $i -a "$dep" -nt $j \) ]; then
+			:
+		else
+			(set -x; \
+			 ${OCAMLDEP:-ocamldep} -pp "${CAMLP4R:-camlp4r} -I ." $i >$dep \
+			|| rm $dep)
+		fi
+		DEPS=$DEPS\ $dep;;
+	esac
+done
+cat $DEPS

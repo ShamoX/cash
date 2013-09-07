@@ -1,0 +1,30 @@
+	Cash, the Caml Shell
+
+*** What is Cash ***
+Cash is a Unix shell (for scripting only) that is embedded within Objective
+Caml.  It's a Caml reimplementation of (an as large as possible subset of) Scsh,
+the Scheme Shell by Olin Shivers.  See the manual doc/doc.ps for complete
+documentation.
+
+*** What you need ***
+- OCaml 3.04 installed
+- Sources of the installed OCaml compiler
+- PCRE installed (preferably in ocaml_install_dir/lib/ocaml/contrib, but you
+  should be able to export PCRELIBDIR=/some/other/path before configure)
+- make
+
+*** How to compile ***
+- ln -s directory_with_the_compiled_ocaml_sources ocaml
+- ./configure
+- make 
+- make install
+	will install cash/cashr in ocaml_install_dir/bin 
+	and libs in ocaml_install_dir/lib/ocaml/contrib
+- make latex / ps / html
+        will make the manual doc/doc.dvi / doc/doc.ps / doc/*.html.  You need an
+        up-to-date ocamldoc (CVS version).
+
+Good luck,
+
+*** Author ***
+Bruno Verlyck <Bruno.Verlyck@inria.fr>

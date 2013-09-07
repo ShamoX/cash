@@ -1,0 +1,1055 @@
+<html><head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Cash" rel="Chapter" href="Cash.html"><title>Cash</title>
+</head>
+<body>
+<code class="code"><span class="keyword">sig</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;version&nbsp;:&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;run_with_in_channel&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;run_with_out_channel&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;run_with_file&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;run_with_string&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;run_with_strings&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;run_with_sexp&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Sexp</span>.simple<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;run_with_sexps&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Sexp</span>.simple&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;string_of_in_channel&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;sexp_list_of_in_channel&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Sexp</span>.simple&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;string_list_of_in_channel&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;list_of_in_channel&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fold_in_channel&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>b&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>b)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>b&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>b<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;proc&nbsp;=&nbsp;<span class="constructor">Proc_3_4</span>.proc<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;run_with_inchan_plus_proc&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;*&nbsp;<span class="constructor">Cash</span>.proc<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;run_with_outchan_plus_proc&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;*&nbsp;<span class="constructor">Cash</span>.proc<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;fd&nbsp;=&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;run_with_collecting&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.fd&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Unix</span>.process_status&nbsp;*&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;char_filter&nbsp;:&nbsp;(char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;char)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;string_filter&nbsp;:&nbsp;?buflen:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;errno_error&nbsp;:&nbsp;<span class="constructor">Unix</span>.error&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;unwind_protect&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="keywordsign">'</span>b&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>b&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;close_fd_after&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;close_in_after&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;close_out_after&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_stdin&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_stdout&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_stderr&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_stdin&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_stdout&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_stderr&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;close_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;close_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;close_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;stdchans_to_stdio&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;stdio_to_stdchans&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_stdio_chans&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;make_string_in_channel&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;make_string_out_channel&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;string_out_channel_output&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?close:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;call_with_string_out_channel&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?close:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;in_channel_of_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;out_channel_of_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fd_of_in_channel&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fd_of_out_channel&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd<br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;in_channel_revealed&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"chan_revealed_count"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;out_channel_revealed&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"chan_revealed_count"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;release_in_channel_handle&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"release_chan_handle"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;release_out_channel_handle&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"release_chan_handle"</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;call_with_fdes_in&nbsp;:&nbsp;(<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;call_with_fdes_out&nbsp;:&nbsp;(<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;move_fd_to_fdes&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;move_in_channel_to_fdes&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;move_out_channel_to_fdes&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;dup_fd&nbsp;:&nbsp;?newfd:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fdes_of_dup_in&nbsp;:&nbsp;?newfd:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fdes_of_dup_out&nbsp;:&nbsp;?newfd:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;in_channel_of_dup_fd&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?newfd:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;dup_in&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?newfd:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;in_channel_of_dup_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?newfd:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;out_channel_of_dup_fd&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?newfd:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;out_channel_of_dup_in&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?newfd:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;dup_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?newfd:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;seek_command&nbsp;=&nbsp;<span class="constructor">Unix</span>.seek_command&nbsp;=&nbsp;<span class="constructor">SEEK_SET</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SEEK_CUR</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SEEK_END</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;seek_fd&nbsp;:&nbsp;?whence:<span class="constructor">Cash</span>.seek_command&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;seek_in&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?whence:<span class="constructor">Cash</span>.seek_command&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;seek_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?whence:<span class="constructor">Cash</span>.seek_command&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tell_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tell_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tell_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;file_perm&nbsp;=&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;open_flag&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.open_flag&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">O_RDONLY</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_WRONLY</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_RDWR</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_NONBLOCK</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_APPEND</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_CREAT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_TRUNC</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_EXCL</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_NOCTTY</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_DSYNC</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_SYNC</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">O_RSYNC</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;open_file_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?perms:<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;open_file_in&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?perms:<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;open_fdes&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?perms:<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;open_input_file&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?flags:<span class="constructor">Cash</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;open_output_file&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?flags:<span class="constructor">Cash</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?perms:<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;openfile&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Unix</span>.file_descr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_input_from_file&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_output_to_file&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_errors_to_file&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;call_with_input_file&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;call_with_output_file&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;call_with_fdes_fn&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?perms:<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;fdes_flags&nbsp;=&nbsp;<span class="constructor">FD_CLOEXEC</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fdes_flags_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fdes_flags&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fdes_flags_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fdes_flags&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fdes_flags_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fdes_flags&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_fdes_flags_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fdes_flags&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_fdes_flags_in&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fdes_flags&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_fdes_flags_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fdes_flags&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fdes_status_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fdes_status_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fdes_status_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_fdes_status_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_fdes_status_in&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_fdes_status_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;pipe&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;*&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fold_input&nbsp;:&nbsp;(<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>b&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="keywordsign">'</span>c&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>b)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>c&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;error_packet&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Sys__error</span>&nbsp;<span class="keyword">of</span>&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Unix__error</span>&nbsp;<span class="keyword">of</span>&nbsp;(<span class="constructor">Unix</span>.error&nbsp;*&nbsp;string&nbsp;*&nbsp;string)<br>
+&nbsp;&nbsp;<span class="keyword">exception</span>&nbsp;<span class="constructor">String_io_error</span>&nbsp;<span class="keyword">of</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Cash</span>.error_packet&nbsp;*&nbsp;string&nbsp;*&nbsp;string&nbsp;*&nbsp;int&nbsp;*&nbsp;int&nbsp;*&nbsp;int)<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_string&nbsp;:&nbsp;?src:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_string_in&nbsp;:&nbsp;?src:<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_string_bang&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?src:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_string_bang_in&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?src:<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_string_partial&nbsp;:&nbsp;?src:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_string_partial_in&nbsp;:&nbsp;?src:<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_string_bang_partial&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?src:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_string_bang_partial_in&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?src:<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;write_string&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?dst:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;write_string_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?dst:<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;write_string_partial&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?dst:<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;write_string_partial_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?dst:<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;selectable&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Nothing</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Read_in</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Read_fd</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Cash</span>.fd<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Write_out</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Write_fd</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Cash</span>.fd<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Except_in</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Except_fd</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Cash</span>.fd<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;select_bang&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?timeout:float&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.selectable&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;*&nbsp;int&nbsp;*&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;select&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?timeout:float&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.selectable&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.selectable&nbsp;array<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;bufpolicy&nbsp;=&nbsp;<span class="constructor">Block</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Line</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Nobuf</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_chan_buffering_in&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?size:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.bufpolicy&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_chan_buffering_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?size:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.bufpolicy&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;force_output&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_all_chans&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;override&nbsp;=&nbsp;<span class="constructor">Don't</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Delete</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Query</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;create_directory&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?perms:<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?override:<span class="constructor">Cash</span>.override&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;create_fifo&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?perms:<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?override:<span class="constructor">Cash</span>.override&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;create_hard_link&nbsp;:&nbsp;?override:<span class="constructor">Cash</span>.override&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;create_symlink&nbsp;:&nbsp;?override:<span class="constructor">Cash</span>.override&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;delete_file&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;delete_directory&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;delete_filesys_object&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_symlink&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;rename_file&nbsp;:&nbsp;?override:<span class="constructor">Cash</span>.override&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_mode_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_mode_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_mode_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_mode_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_perm&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_owner_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_owner_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_owner_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_owner_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_group_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_group_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_group_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_group_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_file_times&nbsp;:&nbsp;?times:float&nbsp;*&nbsp;float&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;sync_file_fd&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;sync_file_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;sync_file_system&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;truncate_file_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;truncate_file_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;truncate_file_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;truncate_file_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;file_kind&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.file_kind&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">S_REG</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">S_DIR</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">S_CHR</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">S_BLK</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">S_LNK</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">S_FIFO</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">S_SOCK</span><br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;file_info&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.stats&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_dev&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_ino&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_kind&nbsp;:&nbsp;<span class="constructor">Cash</span>.file_kind;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_perm&nbsp;:&nbsp;<span class="constructor">Cash</span>.file_perm;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_nlink&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_uid&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_gid&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_rdev&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_size&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_atime&nbsp;:&nbsp;float;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_mtime&nbsp;:&nbsp;float;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;st_ctime&nbsp;:&nbsp;float;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_info_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_info_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_info_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_info_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_type_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_kind<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_type_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_kind<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_type_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_kind<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_type_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_kind<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_inode_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_inode_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_inode_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_inode_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_mode_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_perm<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_mode_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_perm<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_mode_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_perm<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_mode_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_perm<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_nlinks_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_nlinks_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_nlinks_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_nlinks_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_owner_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_owner_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_owner_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_owner_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_group_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_group_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_group_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_group_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_size_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_size_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_size_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_size_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_access_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_access_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_access_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_access_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_mod_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_mod_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_mod_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_mod_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_status_change_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_status_change_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_status_change_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_last_status_change_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_directory_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_directory_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_directory_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_directory_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_fifo_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_fifo_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_fifo_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_fifo_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_regular_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_regular_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_regular_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_regular_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_socket_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_socket_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_socket_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_socket_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_special_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_special_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_special_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_special_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_symlink_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_symlink_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_symlink_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_symlink_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;accessibility&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Accessible</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Unaccessible</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Permission</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">No_directory</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Nonexistent</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_readable_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_readable_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_readable_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_readable_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_writable_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_writable_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_writable_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_writable_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_executable_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_executable_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_executable_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_not_executable_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.accessibility<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_readable_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_readable_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_readable_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_readable_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_writable_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_writable_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_writable_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_writable_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_executable_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_executable_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_executable_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_executable_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;existing&nbsp;=&nbsp;<span class="constructor">Existing</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Unexisting</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Search_denied</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_not_exists_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.existing<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_not_exists_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.existing<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_not_exists_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.existing<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_not_exists_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.existing<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_existing_fn&nbsp;:&nbsp;?chase:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_existing_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_existing_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_existing_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fold_directory&nbsp;:&nbsp;(<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;directory_files&nbsp;:&nbsp;?dot_files:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;glob&nbsp;:&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;glob_quote&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;file_match_pattern&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">String_pat</span>&nbsp;<span class="keyword">of</span>&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Regexp_pat</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Pcre</span>.regexp<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Predicate_pat</span>&nbsp;<span class="keyword">of</span>&nbsp;(string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool)<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_match&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?dot_files:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.file_match_pattern&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;create_temp_file&nbsp;:&nbsp;?prefix:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_temp_file_template&nbsp;:&nbsp;string&nbsp;*&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_temp_file_template&nbsp;:&nbsp;string&nbsp;*&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;temp_file_iterate&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?template:string&nbsp;*&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;option)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;temp_file_channel&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;*&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;exec&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;exec_path&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;exec_with_env&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?env:(string&nbsp;*&nbsp;string)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;exec_path_with_env&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?env:(string&nbsp;*&nbsp;string)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;low_exec&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?env:(string&nbsp;*&nbsp;string)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;exec_path_search&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;exit&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;low_exit&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;=&nbsp;<span class="string">"sys_exit"</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;call_terminally&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;suspend&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fork&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fork_child&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;low_fork&nbsp;:&nbsp;?child:(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fork_with_pipe&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fork_child_with_pipe&nbsp;:&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;low_fork_with_pipe&nbsp;:&nbsp;?child:(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fork_with_pipe_plus&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;list&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fork_child_with_pipe_plus&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd&nbsp;list&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;low_fork_with_pipe_plus&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?child:(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd&nbsp;list&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;pid_of_proc&nbsp;:&nbsp;<span class="constructor">Cash</span>.proc&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;probe_pid&nbsp;=&nbsp;<span class="constructor">Proc_3_4</span>.probe_pid&nbsp;=&nbsp;<span class="constructor">Probe</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Create</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Don't_probe</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;proc_of_pid&nbsp;:&nbsp;?probe:<span class="constructor">Cash</span>.probe_pid&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;autoreap_policy&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Proc_3_4</span>.autoreap_policy&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">No_autoreaping</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Early</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Late</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;autoreap_policy&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?policy:<span class="constructor">Cash</span>.autoreap_policy&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.autoreap_policy<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;reap_zombies&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;process_status&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.process_status&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">WEXITED</span>&nbsp;<span class="keyword">of</span>&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">WSIGNALED</span>&nbsp;<span class="keyword">of</span>&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">WSTOPPED</span>&nbsp;<span class="keyword">of</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">exception</span>&nbsp;<span class="constructor">Child_not_ready</span><br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;wait_flag&nbsp;=&nbsp;<span class="constructor">Unix</span>.wait_flag&nbsp;=&nbsp;<span class="constructor">WNOHANG</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">WUNTRACED</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;wait&nbsp;:&nbsp;?wflags:<span class="constructor">Cash</span>.wait_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.process_status<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;wait_pid&nbsp;:&nbsp;?wflags:<span class="constructor">Cash</span>.wait_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.process_status<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;wait_any&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Proc_3_4</span>.wait_any&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">None_ready</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">No_children</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Exited</span>&nbsp;<span class="keyword">of</span>&nbsp;(<span class="constructor">Cash</span>.proc&nbsp;*&nbsp;<span class="constructor">Cash</span>.process_status)<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;wait_any&nbsp;:&nbsp;?wflags:<span class="constructor">Cash</span>.wait_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.wait_any<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;wait_process_group&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?wflags:<span class="constructor">Cash</span>.wait_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.proc&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.wait_any<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;wait_process_group_pgrp&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?wflags:<span class="constructor">Cash</span>.wait_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.wait_any<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;umask&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_umask&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_umask&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;chdir&nbsp;:&nbsp;?dir:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;cwd&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_cwd&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;pid&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;parent_pid&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;process_group&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_process_group&nbsp;:&nbsp;?proc:<span class="constructor">Cash</span>.proc&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_process_group_pid&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;prio&nbsp;=&nbsp;<span class="constructor">Proc_state_3_5</span>.prio&nbsp;=&nbsp;<span class="constructor">Prio_process</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Prio_pgrp</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Prio_user</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_priority&nbsp;:&nbsp;?who:<span class="constructor">Cash</span>.proc&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.prio&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_priority_pid&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.prio&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;priority&nbsp;:&nbsp;?who:<span class="constructor">Cash</span>.proc&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.prio&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;priority_pid&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.prio&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;nice&nbsp;:&nbsp;?proc:<span class="constructor">Cash</span>.proc&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;nice_pid&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;user_login_name&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;user_uid&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;user_effective_uid&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;user_gid&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;user_effective_gid&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;user_supplementary_gids&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;array<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_uid&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_gid&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;process_times&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.process_times&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tms_utime&nbsp;:&nbsp;float;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tms_stime&nbsp;:&nbsp;float;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tms_cutime&nbsp;:&nbsp;float;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tms_cstime&nbsp;:&nbsp;float;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;process_times&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.process_times<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;cpu_ticks_per_sec&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;user_info&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">User_group_3_6</span>.user_info&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ui_name&nbsp;:&nbsp;string;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ui_uid&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ui_gid&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ui_home_dir&nbsp;:&nbsp;string;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ui_shell&nbsp;:&nbsp;string;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;user_info&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.user_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;user_info_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.user_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;username_to_uid&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;uid_to_username&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;group_info&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">User_group_3_6</span>.group_info&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gi_name&nbsp;:&nbsp;string;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gi_gid&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gi_members&nbsp;:&nbsp;string&nbsp;list;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;group_info&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.group_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;group_info_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.group_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;groupname_to_gid&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;gid_to_groupname&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;command_line_arguments&nbsp;:&nbsp;string&nbsp;list&nbsp;option&nbsp;<span class="constructor">Pervasives</span>.ref<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;command_line&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;make_command_line_arguments&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;arg&nbsp;:&nbsp;?default:<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;arg_star&nbsp;:&nbsp;?default_thunk:(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;argv&nbsp;:&nbsp;?default:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;system_name&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;signal_process&nbsp;:&nbsp;<span class="constructor">Cash</span>.proc&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;signal_process_pid&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;signal_process_group&nbsp;:&nbsp;<span class="constructor">Cash</span>.proc&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;signal_process_group_pgrp&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;itimer&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.interval_timer&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">ITIMER_REAL</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">ITIMER_VIRTUAL</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">ITIMER_PROF</span><br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;itimer_status&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.interval_timer_status&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it_interval&nbsp;:&nbsp;float;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it_value&nbsp;:&nbsp;float;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;itimer&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?newstat:<span class="constructor">Cash</span>.itimer_status&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.itimer&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.itimer_status<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;pause_until_interrupt&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;sleep&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;sleep_until&nbsp;:&nbsp;float&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;date&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Time_3_10</span>.date&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;seconds&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;minute&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;hour&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;month_day&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;month&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;year&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tz_name&nbsp;:&nbsp;string&nbsp;option;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tz_secs&nbsp;:&nbsp;int&nbsp;option;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is_summer&nbsp;:&nbsp;bool&nbsp;option;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;week_day&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;year_day&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;make_date&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?tzn:string&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?tzs:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?summ:bool&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?wday:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?yday:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.date<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;time_zone&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Time_3_10</span>.time_zone&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Tz_local</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Tz_secs</span>&nbsp;<span class="keyword">of</span>&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Tz_name</span>&nbsp;<span class="keyword">of</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;time_plus_ticks&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;ticks_per_sec&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;date&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.date<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;date_of_time&nbsp;:&nbsp;?tz:<span class="constructor">Cash</span>.time_zone&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.date<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;time&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;time_of_date&nbsp;:&nbsp;<span class="constructor">Cash</span>.date&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;string_of_date&nbsp;:&nbsp;<span class="constructor">Cash</span>.date&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;format_date&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.date&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;getenv&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;setenv&nbsp;:&nbsp;?sval:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;alist_of_env&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(string&nbsp;*&nbsp;string)&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;setenv_from_alist&nbsp;:&nbsp;(string&nbsp;*&nbsp;string)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;alist_delete&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="keywordsign">'</span>a&nbsp;*&nbsp;<span class="keywordsign">'</span>b)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="keywordsign">'</span>a&nbsp;*&nbsp;<span class="keywordsign">'</span>b)&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;alist_update&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>b&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="keywordsign">'</span>a&nbsp;*&nbsp;<span class="keywordsign">'</span>b)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="keywordsign">'</span>a&nbsp;*&nbsp;<span class="keywordsign">'</span>b)&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;alist_compress&nbsp;:&nbsp;(<span class="keywordsign">'</span>a&nbsp;*&nbsp;bool)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="keywordsign">'</span>a&nbsp;*&nbsp;bool)&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_env&nbsp;:&nbsp;(string&nbsp;*&nbsp;string)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_total_env&nbsp;:&nbsp;(string&nbsp;*&nbsp;string)&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;add_before&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;add_after&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;home_directory&nbsp;:&nbsp;string&nbsp;<span class="constructor">Pervasives</span>.ref<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;exec_path_list&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_exec_path_list&nbsp;:&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;with_exec_path_list&nbsp;:&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_tty_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_tty_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_tty_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_file_name_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_file_name_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_file_name_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;tty_info&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;control_chars&nbsp;:&nbsp;string;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;input_flags&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;output_flags&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;control_flags&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;local_flags&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;input_speed&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;output_speed&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;time&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;tty_chars&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;delete_char&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;delete_line&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;eof&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;eol&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;interrupt&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;quit&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;suspend&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;stop&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;delayed_suspend&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;delete_word&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;discard&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;eol2&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;literal_next&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;reprint&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;status&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;ttychar&nbsp;:&nbsp;<span class="constructor">Cash</span>.tty_chars<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;disable_tty_char&nbsp;:&nbsp;char<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;tty_in&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;check_parity&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ignore_bad_parity_chars&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mark_parity_errors&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ignore_break&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;interrupt_on_break&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;seven_bits&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cr_to_nl&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ignore_cr&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nl_to_cr&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;input_flow_ctl&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;output_flow_ctl&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xon_any&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;beep_on_overflow&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;lowercase&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;ttyin&nbsp;:&nbsp;<span class="constructor">Cash</span>.tty_in<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;tty_out&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;enable&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nl_to_crnl&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;discard_eot&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;expand_tabs&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cr_to_nl&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nl_does_cr&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;no_col0_cr&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;delay_with_fill_char&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fill_with_del&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uppercase&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bs_delay&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bs_delay0&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bs_delay1&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cr_delay&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cr_delay0&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cr_delay1&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cr_delay2&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cr_delay3&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ff_delay&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ff_delay0&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ff_delay1&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tab_delay&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tab_delay0&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tab_delay1&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tab_delay2&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tab_delayx&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nl_delay&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nl_delay0&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nl_delay1&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vtab_delay&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vtab_delay0&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vtab_delay1&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;all_delay&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;ttyout&nbsp;:&nbsp;<span class="constructor">Cash</span>.tty_out<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;tty_c&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;char_size&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;char_size5&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;char_size6&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;char_size7&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;char_size8&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;enable_parity&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;odd_parity&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;enable_read&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;hup_on_close&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;no_modem_sync&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;two_stop_bits&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ignore_flags&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cts_output_flow_control&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rts_input_flow_control&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;carrier_flow_ctl&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;ttyc&nbsp;:&nbsp;<span class="constructor">Cash</span>.tty_c<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;tty_l&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;canonical&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo_delete_lines&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo_nl&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;visual_delete&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;enable_signals&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;extended&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;no_flush_on_interrupt&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ttou_signal&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo_ctl&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;flush_output&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;hardcopy_delete&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;reprint_unread_chars&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;visual_delete_line&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;alt_delete_word&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;no_kernel_status&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;case_map&nbsp;:&nbsp;nativeint;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;ttyl&nbsp;:&nbsp;<span class="constructor">Cash</span>.tty_l<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;make_tty_info&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nativeint&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;nativeint&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;nativeint&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;nativeint&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;copy_tty_info&nbsp;:&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_info_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_info_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_info_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_info_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_now_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_now_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_now_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_now_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_drain_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_drain_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_drain_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_drain_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_flush_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_flush_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_flush_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_info_flush_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.tty_info&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;send_tty_break_fd&nbsp;:&nbsp;?duration:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;send_tty_break_in&nbsp;:&nbsp;?duration:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;send_tty_break_out&nbsp;:&nbsp;?duration:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;send_tty_break_fn&nbsp;:&nbsp;?duration:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;drain_tty_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;drain_tty_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;drain_tty_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;drain_tty_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_input_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_input_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_input_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_input_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_output_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_output_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_output_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_output_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_both_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_both_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_both_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;flush_tty_both_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;start_tty_output_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;start_tty_output_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;start_tty_output_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;start_tty_output_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;stop_tty_output_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;stop_tty_output_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;stop_tty_output_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;stop_tty_output_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;start_tty_input_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;start_tty_input_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;start_tty_input_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;start_tty_input_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;stop_tty_input_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;stop_tty_input_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;stop_tty_input_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;stop_tty_input_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;open_control_tty_in&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?flags:<span class="constructor">Io_3_2</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;open_control_tty_out&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?flags:<span class="constructor">Io_3_2</span>.open_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.out_channel<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;become_session_leader&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_process_group_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_process_group_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_process_group_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_process_group_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_process_group_fd&nbsp;:&nbsp;<span class="constructor">Cash</span>.fd&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_process_group_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_process_group_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_tty_process_group_fn&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;control_tty_file_name&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;fork_pty_session&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Proc_3_4</span>.proc&nbsp;*&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;*&nbsp;<span class="constructor">Pervasives</span>.out_channel&nbsp;*&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;open_pty&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;*&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;tty_name_of_pty_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;pty_name_of_tty_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;make_pty_generator&nbsp;:&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;socket_domain&nbsp;=&nbsp;<span class="constructor">Unix</span>.socket_domain&nbsp;=&nbsp;<span class="constructor">PF_UNIX</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">PF_INET</span><br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;protocol_family&nbsp;=&nbsp;<span class="constructor">Cash</span>.socket_domain<br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;socket_type&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.socket_type&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">SOCK_STREAM</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SOCK_DGRAM</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SOCK_RAW</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SOCK_SEQPACKET</span><br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;protocol_level&nbsp;=&nbsp;<span class="constructor">Network_4</span>.protocol_level&nbsp;=&nbsp;<span class="constructor">SOL_SOCKET</span><br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;socket&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;family&nbsp;:&nbsp;<span class="constructor">Cash</span>.protocol_family;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sock_in&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sock_out&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.out_channel;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;create_socket&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?protocol:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.protocol_family&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket_type&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;create_socket_pair&nbsp;:&nbsp;<span class="constructor">Cash</span>.socket_type&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket&nbsp;*&nbsp;<span class="constructor">Cash</span>.socket<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;close_socket&nbsp;:&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;inet_addr&nbsp;=&nbsp;<span class="constructor">Unix</span>.inet_addr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;inet_addr_any&nbsp;:&nbsp;<span class="constructor">Cash</span>.inet_addr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;inet_addr_loopback&nbsp;:&nbsp;<span class="constructor">Cash</span>.inet_addr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;inet_addr_broadcast&nbsp;:&nbsp;<span class="constructor">Cash</span>.inet_addr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;sockaddr&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.sockaddr&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">ADDR_UNIX</span>&nbsp;<span class="keyword">of</span>&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">ADDR_INET</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Cash</span>.inet_addr&nbsp;*&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;socket_address_of_unix_address&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;socket_address_of_internet_address&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.inet_addr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;sockaddr_of_host_and_port&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;sockaddr_of_host_and_service&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;unix_address_of_socket_address&nbsp;:&nbsp;<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;internet_address_of_socket_address&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.inet_addr&nbsp;*&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;socket_connect&nbsp;:&nbsp;<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket_type&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;bind_listen_accept_loop_unix&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;bind_listen_accept_loop_port&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;bind_listen_accept_loop_service&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;connect_socket&nbsp;:&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;bind_socket&nbsp;:&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;listen_socket&nbsp;:&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;accept_connection&nbsp;:&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket&nbsp;*&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;socket_local_address&nbsp;:&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;socket_remote_address&nbsp;:&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;shutdown_command&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.shutdown_command&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">SHUTDOWN_RECEIVE</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SHUTDOWN_SEND</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SHUTDOWN_ALL</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;shutdown_socket&nbsp;:&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.shutdown_command&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;msg_flag&nbsp;=&nbsp;<span class="constructor">Unix</span>.msg_flag&nbsp;=&nbsp;<span class="constructor">MSG_OOB</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">MSG_DONTROUTE</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">MSG_PEEK</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;receive_message&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?flags:<span class="constructor">Cash</span>.msg_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;*&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;receive_message_bang&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?flags:<span class="constructor">Cash</span>.msg_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;*&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;receive_message_partial&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?flags:<span class="constructor">Cash</span>.msg_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;*&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;receive_message_bang_partial&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?flags:<span class="constructor">Cash</span>.msg_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;*&nbsp;<span class="constructor">Cash</span>.sockaddr<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;send_message&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?flags:<span class="constructor">Cash</span>.msg_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?sockaddr:<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;send_message_partial&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?flags:<span class="constructor">Cash</span>.msg_flag&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?sockaddr:<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;socket_bool_option&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.socket_bool_option&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">SO_DEBUG</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_BROADCAST</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_REUSEADDR</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_KEEPALIVE</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_DONTROUTE</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_OOBINLINE</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_ACCEPTCONN</span><br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;socket_int_option&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.socket_int_option&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">SO_SNDBUF</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_RCVBUF</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_ERROR</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_TYPE</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_RCVLOWAT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_SNDLOWAT</span><br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;socket_optint_option&nbsp;=&nbsp;<span class="constructor">Unix</span>.socket_optint_option&nbsp;=&nbsp;<span class="constructor">SO_LINGER</span><br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;socket_float_option&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.socket_float_option&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">SO_RCVTIMEO</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">SO_SNDTIMEO</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;socket_option_bool&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.protocol_level&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket_bool_option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_socket_option_bool&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.protocol_level&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket_bool_option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;socket_option_int&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.protocol_level&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket_int_option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_socket_option_int&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.protocol_level&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket_int_option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;socket_option_optint&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.protocol_level&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket_optint_option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_socket_option_optint&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.protocol_level&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket_optint_option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;socket_option_float&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.protocol_level&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket_float_option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;set_socket_option_float&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.socket&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Cash</span>.protocol_level&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.socket_float_option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;float&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;herror&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">HOST_NOT_FOUND</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">TRY_AGAIN</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">NO_RECOVERY</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">NO_DATA</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">NO_ADDRESS</span><br>
+&nbsp;&nbsp;<span class="keyword">exception</span>&nbsp;<span class="constructor">Netdb_error</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Cash</span>.herror<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;host_info&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.host_entry&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h_name&nbsp;:&nbsp;string;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h_aliases&nbsp;:&nbsp;string&nbsp;array;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h_addrtype&nbsp;:&nbsp;<span class="constructor">Cash</span>.protocol_family;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h_addr_list&nbsp;:&nbsp;<span class="constructor">Cash</span>.inet_addr&nbsp;array;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;host_info_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.host_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;host_info_addr&nbsp;:&nbsp;<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.host_info<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;network_info&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_name&nbsp;:&nbsp;string;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_aliases&nbsp;:&nbsp;string&nbsp;array;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_addrtype&nbsp;:&nbsp;<span class="constructor">Cash</span>.protocol_family;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_net&nbsp;:&nbsp;int32;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;network_info_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.network_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;network_info_addr&nbsp;:&nbsp;<span class="constructor">Cash</span>.sockaddr&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.network_info<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;service_info&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.service_entry&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s_name&nbsp;:&nbsp;string;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s_aliases&nbsp;:&nbsp;string&nbsp;array;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s_port&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s_proto&nbsp;:&nbsp;string;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;service_info_name&nbsp;:&nbsp;?protocol:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.service_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;service_info_port&nbsp;:&nbsp;?protocol:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.service_info<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;protocol_info&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Unix</span>.protocol_entry&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p_name&nbsp;:&nbsp;string;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p_aliases&nbsp;:&nbsp;string&nbsp;array;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p_proto&nbsp;:&nbsp;int;<br>
+&nbsp;&nbsp;}&nbsp;<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;protocol_info_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.protocol_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;protocol_info_port&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.protocol_info<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_name_directory&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_name_non_directory&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_name_as_directory&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;directory_as_file_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_file_name_absolute&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_name_directory&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_name_nondirectory&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;split_file_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_name_of_path_list&nbsp;:&nbsp;?dir:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_name_extension&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;file_name_sans_extension&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;parse_file_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;*&nbsp;string&nbsp;*&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;replace_extension&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;simplify_file_name&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;resolve_file_name&nbsp;:&nbsp;?dir:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;expand_file_name&nbsp;:&nbsp;?dir:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;absolute_file_name&nbsp;:&nbsp;?dir:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;home_dir&nbsp;:&nbsp;?user:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;home_file&nbsp;:&nbsp;?user:string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;substitute_env_vars&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;index&nbsp;:&nbsp;?from:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;rindex&nbsp;:&nbsp;?from:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;substring&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;xsubstring&nbsp;:&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_letter&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_lower_case&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_upper_case&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_title_case&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_digit&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_letter_or_digit&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_graphic&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_printing&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_whitespace&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_blank&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_iso_control&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_punctuation&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_hex_digit&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_ascii&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_alphabetic&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_alphanumeric&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;is_numeric&nbsp;:&nbsp;char&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;handle_delim&nbsp;=&nbsp;<span class="constructor">Trim</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Peek</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Concat</span><br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;termination_kind&nbsp;=&nbsp;<span class="constructor">Eof</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Read</span>&nbsp;<span class="keyword">of</span>&nbsp;char&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Full_buffer</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_line&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?handle_newline:<span class="constructor">Cash</span>.handle_delim&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_line_split&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;*&nbsp;<span class="constructor">Cash</span>.termination_kind<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_paragraph&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?handle_delim:<span class="constructor">Cash</span>.handle_delim&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_paragraph_split&nbsp;:&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;*&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_delimited&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?chan:<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?handle_delim:<span class="constructor">Cash</span>.handle_delim&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Charset_14</span>.any_t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_delimited_split&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?chan:<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Charset_14</span>.any_t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;*&nbsp;<span class="constructor">Cash</span>.termination_kind<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_delimited_bang&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?chan:<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?handle_delim:<span class="constructor">Cash</span>.handle_delim&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Charset_14</span>.any_t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;read_delimited_bang_split&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?chan:<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Charset_14</span>.any_t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(int&nbsp;*&nbsp;<span class="constructor">Cash</span>.termination_kind)&nbsp;option<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;low_read_delimited_bang&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?chan:<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?end_:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Charset_14</span>.any_t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.handle_delim&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Cash</span>.termination_kind&nbsp;*&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;skip_char_set&nbsp;:&nbsp;?chan:<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Charset_14</span>.any_t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;record_reader&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?delims:<span class="constructor">Charset_14</span>.any_t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?elide_delims:bool&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?handle_delim:<span class="constructor">Delim_7</span>.handle_delim&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;record_reader_split&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?delims:<span class="constructor">Charset_14</span>.any_t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?elide_delims:bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;*&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;handle_field_delim&nbsp;=&nbsp;<span class="constructor">Trim_f</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Split_f</span>&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Concat_f</span><br>
+&nbsp;&nbsp;<span class="keyword">and</span>&nbsp;delim_matcher&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Match_proc</span>&nbsp;<span class="keyword">of</span>&nbsp;(string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;*&nbsp;int)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">String</span>&nbsp;<span class="keyword">of</span>&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Charset</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Charset_14</span>.any_t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Regexp</span>&nbsp;<span class="keyword">of</span>&nbsp;<span class="constructor">Pcre</span>.regexp<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">|</span>&nbsp;<span class="constructor">Pattern</span>&nbsp;<span class="keyword">of</span>&nbsp;string<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;field_splitter&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?field:<span class="constructor">Cash</span>.delim_matcher&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?num_fields:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;infix_splitter&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?delim:<span class="constructor">Cash</span>.delim_matcher&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?num_fields:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?handle_delim:<span class="constructor">Cash</span>.handle_field_delim&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;suffix_splitter&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?delim:<span class="constructor">Cash</span>.delim_matcher&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?num_fields:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?handle_delim:<span class="constructor">Cash</span>.handle_field_delim&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;sloppy_suffix_splitter&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?delim:<span class="constructor">Cash</span>.delim_matcher&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?num_fields:int&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?handle_delim:<span class="constructor">Cash</span>.handle_field_delim&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;default_field_matcher&nbsp;:&nbsp;<span class="constructor">Cash</span>.delim_matcher<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;default_infix_matcher&nbsp;:&nbsp;<span class="constructor">Cash</span>.delim_matcher<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;default_suffix_matcher&nbsp;:&nbsp;<span class="constructor">Cash</span>.delim_matcher<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;field_reader&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?field_parser:(?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list)&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?rec_reader:(<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string)&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;unit&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Pervasives</span>.in_channel&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;*&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;default_field_parser&nbsp;:&nbsp;?start:int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string&nbsp;list<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;gen_field_reader&nbsp;:&nbsp;(<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>b)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;(<span class="keywordsign">'</span>c&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>c&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;*&nbsp;<span class="keywordsign">'</span>b<br>
+<span class="keyword">end</span></code></body></html>
