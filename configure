@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Guess values for system-dependent variables and create Makefiles.
-# Generated automatically using autoconf version 2.13 
+# Generated automatically using autoconf version 2.13
 # Copyright (C) 1992, 93, 94, 95, 96 Free Software Foundation, Inc.
 #
 # This configure script is free software; the Free Software Foundation
@@ -536,13 +536,13 @@ else
   /*)
   ac_cv_path_OCAMLC="$OCAMLC" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLC="$OCAMLC" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLC="$ac_dir/$ac_word"
@@ -588,13 +588,13 @@ else
   /*)
   ac_cv_path_OCAMLOPT="$OCAMLOPT" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLOPT="$OCAMLOPT" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLOPT="$ac_dir/$ac_word"
@@ -641,13 +641,13 @@ else
   /*)
   ac_cv_path_OCAMLCDOTOPT="$OCAMLCDOTOPT" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLCDOTOPT="$OCAMLCDOTOPT" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLCDOTOPT="$ac_dir/$ac_word"
@@ -691,13 +691,13 @@ else
   /*)
   ac_cv_path_OCAMLOPTDOTOPT="$OCAMLOPTDOTOPT" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLOPTDOTOPT="$OCAMLOPTDOTOPT" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLOPTDOTOPT="$ac_dir/$ac_word"
@@ -741,13 +741,13 @@ else
   /*)
   ac_cv_path_OCAMLDEP="$OCAMLDEP" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLDEP="$OCAMLDEP" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLDEP="$ac_dir/$ac_word"
@@ -781,13 +781,13 @@ else
   /*)
   ac_cv_path_OCAMLLEX="$OCAMLLEX" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLLEX="$OCAMLLEX" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLLEX="$ac_dir/$ac_word"
@@ -820,13 +820,13 @@ else
   /*)
   ac_cv_path_OCAMLLEXDOTOPT="$OCAMLLEXDOTOPT" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLLEXDOTOPT="$OCAMLLEXDOTOPT" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLLEXDOTOPT="$ac_dir/$ac_word"
@@ -861,13 +861,13 @@ else
   /*)
   ac_cv_path_CAMLP4="$CAMLP4" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_CAMLP4="$CAMLP4" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_CAMLP4="$ac_dir/$ac_word"
@@ -901,13 +901,13 @@ else
   /*)
   ac_cv_path_CAMLP4R="$CAMLP4R" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_CAMLP4R="$CAMLP4R" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_CAMLP4R="$ac_dir/$ac_word"
@@ -941,13 +941,13 @@ else
   /*)
   ac_cv_path_OCAMLMKTOP="$OCAMLMKTOP" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLMKTOP="$OCAMLMKTOP" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLMKTOP="$ac_dir/$ac_word"
@@ -981,13 +981,13 @@ else
   /*)
   ac_cv_path_OCAMLMKLIB="$OCAMLMKLIB" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLMKLIB="$OCAMLMKLIB" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLMKLIB="$ac_dir/$ac_word"
@@ -1021,13 +1021,13 @@ else
   /*)
   ac_cv_path_OCAMLDOC="$OCAMLDOC" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLDOC="$OCAMLDOC" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLDOC="$ac_dir/$ac_word"
@@ -1060,13 +1060,13 @@ else
   /*)
   ac_cv_path_OCAMLDOCDOTOPT="$OCAMLDOCDOTOPT" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_OCAMLDOCDOTOPT="$OCAMLDOCDOTOPT" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$OCAMLBINDIR"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_OCAMLDOCDOTOPT="$ac_dir/$ac_word"
@@ -1094,7 +1094,7 @@ test -d ./ocaml ||
 	{ echo "configure: error: Please make a symlink named ocaml to the ocaml sources" 1>&2; exit 1; }
 OCAMLSRCDIR=`cd ./ocaml && /bin/pwd`
 
-: "${PCRELIBDIR=$OCAMLLIB/contrib}"
+: "${PCRELIBDIR=$(ocamlfind query pcre)}"
 test -f $PCRELIBDIR/pcre.cma ||
 	{ echo "configure: error: Cannot find pcre.cma in $PCRELIBDIR" 1>&2; exit 1; }
 
@@ -1423,7 +1423,7 @@ test "$no_create" = yes || ${CONFIG_SHELL-/bin/sh} $CONFIG_STATUS || exit 1
 chmod a-w Makefile set_dir.ml cash-tramp.ml
 echo creating sys.h
 >sys.h
-cc=`cc=$OCAMLC verbose=yes sh ocaml/config/auto-aux/hasgot -verbose 2>&1 | 
+cc=`cc=$OCAMLC verbose=yes sh ocaml/config/auto-aux/hasgot -verbose 2>&1 |
 	sed -n "/^+ /s///;s/hasgot.c//;s/''//;s/ -c / /p"`
 if cc="$cc" sh ocaml/config/auto-aux/hasgot -i netdb.h getnetbyname getnetbyaddr; then
 	echo '#define HAS_GETNET' >>sys.h

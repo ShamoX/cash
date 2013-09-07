@@ -160,7 +160,7 @@ release/INDEX:  ;
 atom.ml: atomo.mll
 	ocamllex atomo.mll
 	@rm -f atom.ml
-	camlp4 pa_o.cmo pr_r.cmo -l90 atomo.ml | sed -e '/^# [0-9]/d' >atom.ml
+	camlp4 pa_o.cmo pr_r.cmo -l90 atomo.ml | LANG=C sed -e '/^# [0-9]/d' >atom.ml
 	if [ -s atom.ml ]; then set -x;mv atomo.ml atom.mlo; else set -x;rm atom.ml; fi
 	@[ -f atom.ml ] && chmod a-w atom.ml
 
